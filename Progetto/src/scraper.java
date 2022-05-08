@@ -13,7 +13,9 @@ public class scraper {
 	public void getPage(String nome) {
 		String sito = "https://it.wikipedia.org/wiki/" + nome;
 		driver.get(sito);
+		driver.quit();
 	}
+	
 	
 
 }
