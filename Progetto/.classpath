@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Utente/Downloads/selenium-server-4.1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Utente/Downloads/jsoup-1.14.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
