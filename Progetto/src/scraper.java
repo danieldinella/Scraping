@@ -5,7 +5,7 @@ public class scraper {
 	private ChromeDriver driver;
 	
 	public scraper() {
-		//System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
 		driver = new ChromeDriver();
 		
 	}
