@@ -1,6 +1,4 @@
 import org.openqa.selenium.chrome.ChromeDriver;
-import graphql.language.Document;
-import org.jsoup.Jsoup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,8 +24,8 @@ public class main {
         		for (WebElement ris : righe) {
             System.out.println(ris.getText());
             
-            //Quit website
-            driver.quit();
+            //Quitting website
+            //driver.quit();
         }
 	}
 }
