@@ -19,10 +19,10 @@ public class main {
 			driver.get(nome);
 			
 			//Inserting all the lines of the table in an Arraylist
-			WebElement tabella = driver.findElement(By.className("sinottico"));
-			List<WebElement> righe = tabella.findElements(By.tagName("td"));
-        	for (WebElement ris : righe) {
-            System.out.println(ris.getText());
+			WebElement corpo = driver.findElement(By.className("my-parser-output"));
+			List<WebElement> tabelle = corpo.findElements(By.className("wikitable"));
+        	for (WebElement imp : tabelle) {
+        		
         	}
         	
             //Quitting website
