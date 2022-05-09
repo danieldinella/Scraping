@@ -4,15 +4,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class main {
 
 	public static void main(String[] args) {
 		
+			ArrayList array = new ArrayList();
+			control con = new control();
+		
 			//URL settings
 			System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
 			Scanner sca = new Scanner(System.in);
-			String nome = "https://it.wikipedia.org/wiki/" + sca.next();
+			String nome = "https://it.wikipedia.org/wiki/imperatori_romani";
 
 			//Opening website
 			WebDriver driver = new ChromeDriver();
@@ -24,11 +28,18 @@ public class main {
         	for (WebElement ris : tabelle) {
         		List<WebElement> tab = ris.findElements(By.tagName("b"));
         		for (WebElement imp : tab) {
-        			System.out.println(imp.getText());
+        			String word = imp.getText();
+        			if (!word.equals("Oriente") && !word.equals("Occidente") &&  con.isDigit(word)){
+        				array.add(imp.getText());
+            			//System.out.println(imp.getText());
+        			}
         		}
+        	}
+        	for (int x = 0; x < array.size(); x++) {
+        		System.out.println(array.get(x));
         	}
         	
             //Quitting website
-            //driver.quit
+            driver.quit();
 	}
 }
