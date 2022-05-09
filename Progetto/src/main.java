@@ -11,35 +11,21 @@ public class main {
 	public static void main(String[] args) {
 		
 			ArrayList array = new ArrayList();
-			control con = new control();
 		
 			//URL settings
 			System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
 			Scanner sca = new Scanner(System.in);
 			String nome = "https://it.wikipedia.org/wiki/imperatori_romani";
 
-			//Opening website
+			//Opening wikipedia
 			WebDriver driver = new ChromeDriver();
 			driver.get(nome);
 			
-			//Inserting all the lines of the table in an Arraylist
-			WebElement corpo = driver.findElement(By.className("mw-parser-output"));
-			List<WebElement> tabelle = corpo.findElements(By.className("wikitable"));
-        	for (WebElement ris : tabelle) {
-        		List<WebElement> tab = ris.findElements(By.tagName("b"));
-        		for (WebElement imp : tab) {
-        			String word = imp.getText();
-        			if (!word.equals("Oriente") && !word.equals("Occidente") &&  con.isDigit(word)){
-        				array.add(imp.getText());
-            			//System.out.println(imp.getText());
-        			}
-        		}
-        	}
-        	for (int x = 0; x < array.size(); x++) {
-        		System.out.println(array.get(x));
-        	}
-        	
-            //Quitting website
+			//Scraping the emperors by xpath
+			List<WebElement> imp = driver.findElements(By.xpath("//body/div[@id='content']/div[@id='bodyContent']/div[@id='mw-content-text']"
+					+ "/div[@class='mw-parser-output']/table[@class='wikitable']/tbody/tr[not(@bgcolor='FFFFFF')]/td[2]/b/a"));
+			
+            //Quitting browser page
             driver.quit();
 	}
 }
