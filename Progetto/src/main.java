@@ -19,10 +19,13 @@ public class main {
 			driver.get(nome);
 			
 			//Inserting all the lines of the table in an Arraylist
-			WebElement corpo = driver.findElement(By.className("my-parser-output"));
+			WebElement corpo = driver.findElement(By.className("mw-parser-output"));
 			List<WebElement> tabelle = corpo.findElements(By.className("wikitable"));
-        	for (WebElement imp : tabelle) {
-        		
+        	for (WebElement ris : tabelle) {
+        		List<WebElement> tab = ris.findElements(By.tagName("b"));
+        		for (WebElement imp : tab) {
+        			System.out.println(imp.getText());
+        		}
         	}
         	
             //Quitting website
