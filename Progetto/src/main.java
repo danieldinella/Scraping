@@ -17,15 +17,15 @@ public class main {
 			//Opening website
 			WebDriver driver = new ChromeDriver();
 			driver.get(nome);
-		
+			
 			//Inserting all the lines of the table in an Arraylist
 			WebElement tabella = driver.findElement(By.className("sinottico"));
 			List<WebElement> righe = tabella.findElements(By.tagName("td"));
-        		for (WebElement ris : righe) {
+        	for (WebElement ris : righe) {
             System.out.println(ris.getText());
-            
+        	}
+        	
             //Quitting website
             //driver.quit();
-        }
 	}
 }
