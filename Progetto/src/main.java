@@ -1,5 +1,6 @@
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.List;
@@ -15,15 +16,25 @@ public class main {
 			//URL settings
 			System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
 			Scanner sca = new Scanner(System.in);
-			String nome = "https://it.wikipedia.org/wiki/imperatori_romani";
+			String nome = "https://it.wikipedia.org/wiki/Gaio_Giulio_Cesare";
 
 			//Opening wikipedia
 			WebDriver driver = new ChromeDriver();
 			driver.get(nome);
 			
-			//Scraping the emperors by xpath
-			List<WebElement> imp = driver.findElements(By.xpath("//body/div[@id='content']/div[@id='bodyContent']/div[@id='mw-content-text']"
-					+ "/div[@class='mw-parser-output']/table[@class='wikitable']/tbody/tr[not(@bgcolor='FFFFFF')]/td[2]/b/a"));
+			List<WebElement> imp = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
+			int indice = -1;
+			int indice2 = 1;
+			for (WebElement tab : imp) {
+				if (tab.getText().equals("Figli")) {
+					indice = indice2 + 1;
+				}
+				indice2++;
+			}
+			List<WebElement> imp2 = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+indice+"]/td"));
+			for (WebElement tab : imp2) {
+				System.out.println(tab.getText());
+			}
 			
             //Quitting browser page
             driver.quit();
