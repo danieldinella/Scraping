@@ -20,30 +20,17 @@ public class main {
 		
 		person per = new person(imp, link);
 		per.setDinastia();
+		per.setPadre();
+		per.setMadre();
+		per.setConiuge();
 		per.setFigli();
-		per.getFigli();
-		person l = (person) per.getFigli().get(0);
-		l.printFigli(l.getFigli());
-		
-		/*
-		List<WebElement> imp = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
-		int indice = -1;
-		int indice2 = 1;
-		for (WebElement tab : imp) {
-			if (tab.getText().equals("Figli")) {
-				indice = indice2 + 1;
-			}
-			indice2++;
-		}
-		
-		List<WebElement> imp2 = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+indice+"]/td"));
-		for (WebElement tab : imp2) {
-			System.out.println(tab.getText());
-		}
-		
-		
-		//Quitting browser page
-	    driver.quit();
-	    */
+		System.out.println("Nome: " + per.getNome());
+		System.out.println("Dinastia: " + per.getDinastia());
+		System.out.println("Madre: " + per.getMadre());
+		System.out.println("Padre: " + per.getPadre());
+		System.out.println("Coniugi: ");
+		per.printConiuge(per.getConiuge());
+		System.out.println("Figli: ");
+		per.printFigli(per.getFigli());
 	}
 }
