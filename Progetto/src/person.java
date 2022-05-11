@@ -12,65 +12,95 @@ import com.google.common.graph.ElementOrder.Type;
 public class person {
 	
 	
+	private WebDriver driver = new ChromeDriver();
 	private String nome;
-	private ArrayList figli;
-	private WebDriver driver;
 	private String link;
-	private String dinastia;
-	private String padre;
-	private String madre;
-	private ArrayList coniuge;
+	private String dinastia = "";
+	private String padre = "";
+	private String madre = "";
+	private ArrayList figli = new ArrayList();
+	private ArrayList coniuge = new ArrayList();
+	private List<WebElement> tab;
 
+	// CONSTRUCTOR
 	public person(String nome, String link) {
-		//URL settings
+		//URL SETTINGS
 		System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
 		
+		//ATTRIBUTES SETTINGS
 		this.nome = nome;
-		this.figli = new ArrayList();
-		this.dinastia = "";
-		this.padre = "";
-		this.madre = "";
-		this.coniuge = new ArrayList();
-		
-		//Opening wikipedia
-		this.driver = new ChromeDriver();
 		this.link = link;
-		this.figli = new ArrayList();
 		this.driver.get(link);
+		this.tab = driver.findElements(By.xpath("//div[@id = 'mw-content-text']"
+				+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
 	}
+	
+	
+	// GET METHODS
 	
 	public ArrayList getFigli() {
 		return this.figli;
-	}
-	
-	public void setDinastia() {
-		List<WebElement> dina = driver.findElements(By.partialLinkText("Dinastia"));
-		if (dina.size() != 0) {
-			this.dinastia = dina.get(0).getText();
-		}
 	}
 	
 	public String getDinastia() {
 		return this.dinastia;
 	}
 	
-	public ArrayList setFigli() {
-		List<WebElement> imp = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
-		int indice = -1;
-		int indice2 = 1;
-		for (WebElement tab : imp) {
-			if (tab.getText().equals("Figli")) {
-				indice = indice2 + 1;
+	public String getNome() {
+		return this.nome;
+	}
+	
+	public String getPadre() {
+		return this.padre;
+	}
+	
+	public String getMadre() {
+		return this.madre;
+	}
+	
+	public ArrayList getConiuge() {
+		return this.coniuge;
+	}
+	
+	
+	//SET METHODS
+	
+	public void setDinastia() {
+		
+		// GET DINASTY'S NAME
+		List<WebElement> dina = driver.findElements(By.partialLinkText("Dinastia"));
+		
+		// IF DINASTY'S EXISTS THEN SET IT
+		if (dina.size() != 0) {
+			this.dinastia = dina.get(0).getText();
+		}
+	}
+	
+	public void setFigli() {
+		
+		// GET NUMBER OF SONS' TABLE LINE
+		int i = -1;
+		int j = 1;
+		for (WebElement t : this.tab) {
+			if (t.getText().equals("Figli")) {
+				i = j + 1;
 			}
 			else {
-				indice2++;
+				j++;
 			}
 		}
-		if(indice != -1) {
-			List<WebElement> imp2 = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+indice+"]/td/a"));
-			for (WebElement tab : imp2) {
-				String nome = tab.getText();
-				String link = tab.getAttribute("href");
+		
+		// IF SONS' LINE EXISTS
+		if(i != -1) {
+			
+			// GET SONS' ATTRIBUTES
+			List<WebElement> riga = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']"
+					+ "/table[@class = 'sinottico']/tbody/tr["+i+"]/td/a"));
+			
+			// SET NEW PERSON OBJECT WITH SONS' ATTRIBUTES
+			for (WebElement r : riga) {
+				String nome = r.getText();
+				String link = r.getAttribute("href");
 				person per = new person(nome, link);
 				per.setDinastia();
 				per.setPadre();
@@ -80,10 +110,10 @@ public class person {
 					per.setFigli();
 				}
 				
-				if (this.nome == "Giulia maggiore") System.out.println(this.nome);
+				// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
 				this.figli.add(per);
 			}
-			this.driver.quit();
+			
 			System.out.println("Nome: " + this.nome);
 			System.out.println("Dinastia: " + this.dinastia);
 			System.out.println("Madre: " + this.madre);
@@ -92,92 +122,90 @@ public class person {
 			printConiuge(getConiuge());
 			System.out.println("Figli: ");
 			printFigli(getFigli());
-			return this.figli;
 		}
-		else {
-			this.driver.quit();
-			return this.figli;
-		}
-	}
-
-	public String getNome() {
-		return this.nome;
-	}
-	
-	public void printFigli(ArrayList l) {
-		for (int x = 0; x < l.size(); x++) {
-			person p = (person) l.get(x);
-			System.out.println(p.getNome());
-		}
-	}
-
-	public String getPadre() {
-		return this.padre;
+		
+		// CLOSE THE WEB SITE
+		this.driver.quit();
 	}
 
 	public void setPadre() {
-		List<WebElement> imp = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
-		int indice = -1;
-		int indice2 = 1;
-		for (WebElement tab : imp) {
-			if (tab.getText().equals("Padre")) {
-				indice = indice2 + 1;
+
+		// GET NUMBER OF DAD'S TABLE LINE
+		int i = -1;
+		int j = 1;
+		for (WebElement t : this.tab) {
+			if (t.getText().equals("Padre")) {
+				i = j + 1;
 			}
 			else {
-				indice2++;
+				j++;
 			}
 		}
-		if(indice != -1) {
-			this.padre = driver.findElement(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+indice+"]/td/a")).getText();
+		
+		// IF DAD'S LINE EXISTS THEN SET IT
+		if(i != -1) {
+			this.padre = driver.findElement(By.xpath("//div[@id = 'mw-content-text']"
+					+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+i+"]/td/a")).getText();
 		}
-	}
-
-	public String getMadre() {
-		return this.madre;
 	}
 
 	public void setMadre() {
-		List<WebElement> imp = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
-		int indice = -1;
-		int indice2 = 1;
-		for (WebElement tab : imp) {
-			if (tab.getText().equals("Madre")) {
-				indice = indice2 + 1;
+		
+		// GET NUMBER OF MOM'S TABLE LINE
+		int i = -1;
+		int j = 1;
+		for (WebElement t : this.tab) {
+			if (t.getText().equals("Madre")) {
+				i = j + 1;
 			}
 			else {
-				indice2++;
+				j++;
 			}
 		}
-		if(indice != -1) {
-			this.madre = driver.findElement(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+indice+"]/td/a")).getText();
+		
+		// IF MOM'S LINE EXISTS THEN SET IT
+		if(i != -1) {
+			this.madre = driver.findElement(By.xpath("//div[@id = 'mw-content-text']"
+					+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+i+"]/td/a")).getText();
 		}
-	}
-
-	public ArrayList getConiuge() {
-		return this.coniuge;
 	}
 
 	public void setConiuge() {
-		List<WebElement> imp = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
-		int indice = -1;
-		int indice2 = 1;
-		for (WebElement tab : imp) {
-			if (tab.getText().equals("Coniuge") | tab.getText().equals("Coniugi")) {
-				indice = indice2 + 1;
+		
+		// GET NUMBER OF CONSORTS' TABLE LINE
+		int i = -1;
+		int j = 1;
+		for (WebElement t : this.tab) {
+			if (t.getText().equals("Coniuge") | t.getText().equals("Coniugi")) {
+				i = j + 1;
 			}
 			else {
-				indice2++;
+				j++;
 			}
 		}
-		if(indice != -1) {
-			List<WebElement> imp2 = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+indice+"]/td/a"));
-			for (WebElement tab : imp2) {
-				this.coniuge.add(tab.getText());
+		
+		// IF CONSORTS' LINE EXISTS THEN SET IT
+		if(i != -1) {
+			List<WebElement> riga = driver.findElements(By.xpath("//div[@id = 'mw-content-text']"
+					+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+i+"]/td/a"));
+			for (WebElement r : riga) {
+				// CHECK TO WIKIPEDIA IMPERFECTIONS
+				String con = r.getText();
+				if (!Character.isDigit(con.charAt(0))){
+					this.coniuge.add(r.getText());
+				}
 			}
 		}
 	}
 	
 	public void printConiuge(ArrayList l) {
+		for (int x = 0; x < l.size(); x++) {
+			person fig  = (person) l.get(x);
+			System.out.println(l.get(x));
+		}
+	}
+	
+	public void printFigli(ArrayList l) {
 		for (int x = 0; x < l.size(); x++) {
 			System.out.println(l.get(x));
 		}
