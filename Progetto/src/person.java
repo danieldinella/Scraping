@@ -6,13 +6,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.google.common.graph.ElementOrder.Type;
 
 public class person {
 	
-	
-	private WebDriver driver = new ChromeDriver();
+	DesiredCapabilities caps = new DesiredCapabilities();
+	private ChromeOptions options = new ChromeOptions();
+	private WebDriver driver;
 	private String nome;
 	private String link;
 	private String dinastia = "";
@@ -26,6 +29,9 @@ public class person {
 	public person(String nome, String link) {
 		//URL SETTINGS
 		System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless");
+		this.driver = new ChromeDriver(options);
 		
 		//ATTRIBUTES SETTINGS
 		this.nome = nome;
@@ -198,16 +204,19 @@ public class person {
 		}
 	}
 	
+
+	
+	
+	// STAMPE PER DEBUG
 	public void printConiuge(ArrayList l) {
 		for (int x = 0; x < l.size(); x++) {
-			person fig  = (person) l.get(x);
 			System.out.println(l.get(x));
 		}
 	}
-	
 	public void printFigli(ArrayList l) {
 		for (int x = 0; x < l.size(); x++) {
-			System.out.println(l.get(x));
+			person fig  = (person) l.get(x);
+			System.out.println(fig.getNome());
 		}
 	}
 }
