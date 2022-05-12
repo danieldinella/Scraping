@@ -13,7 +13,6 @@ import com.google.common.graph.ElementOrder.Type;
 
 public class person {
 	
-	DesiredCapabilities caps = new DesiredCapabilities();
 	private ChromeOptions options = new ChromeOptions();
 	private WebDriver driver;
 	private String nome;
