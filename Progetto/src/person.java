@@ -68,6 +68,10 @@ public class person {
 		return this.coniuge;
 	}
 	
+	public boolean checkImperatore() {
+		return this.imperatore;
+	}
+
 	
 	//SET METHODS
 	
@@ -113,6 +117,7 @@ public class person {
 				per.setPadre();
 				per.setMadre();
 				per.setConiuge();
+				
 				if (this.dinastia != "") {
 					per.setFigli();
 				}
@@ -123,6 +128,7 @@ public class person {
 			
 		}
 		
+		// STAMPE PER DEBUG
 		System.out.println("Nome: " + this.nome);
 		System.out.println("Dinastia: " + this.dinastia);
 		if(this.imperatore) { System.out.println("E' un imperatore"); }
@@ -133,7 +139,7 @@ public class person {
 		System.out.println("Figli: ");
 		printFigli(getFigli());
 		System.out.println("\n");
-		
+
 		// CLOSE THE WEB SITE
 		this.driver.quit();
 	}
@@ -159,6 +165,7 @@ public class person {
 		}
 	}
 
+
 	public void setMadre() {
 		
 		// GET NUMBER OF MOM'S TABLE LINE
@@ -179,6 +186,7 @@ public class person {
 					+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+i+"]/td/a")).getText();
 		}
 	}
+
 
 	public void setConiuge() {
 		
@@ -208,19 +216,17 @@ public class person {
 		}
 	}
 	
+
 	public void setImperatore() {
-		// CHECK IF THE PERSON IS A IMPERATOR
+		// CHECK IF THE PERSON IS AN EMPEROR
 				for (WebElement t : this.tab) {
 					if (t.getText().equals("Regno")) {
-						// IF THE PERSON IS A IMPERATOR CHANGE HIS STATUS
+						// IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
 						this.imperatore = true;
 					}
 				}
 	}
 
-	public boolean checkImperatore() {
-		return this.imperatore;
-	}
 	
 	// STAMPE PER DEBUG
 	public void printConiuge(ArrayList l) {

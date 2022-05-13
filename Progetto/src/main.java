@@ -15,8 +15,8 @@ public class main {
 		
 		//input
 		Scanner sca = new Scanner(System.in);
-		String imp = "Agrippina maggiore";
-		String link = "https://it.wikipedia.org/wiki/Agrippina_maggiore";
+		String imp = "Augusto";
+		String link = "https://it.wikipedia.org/wiki/" + imp;
 		
 		person per = new person(imp, link);
 		per.setDinastia();
