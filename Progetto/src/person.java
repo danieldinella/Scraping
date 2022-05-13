@@ -18,6 +18,7 @@ public class person {
 	private String nome;
 	private String link;
 	private String dinastia = "";
+	private boolean imperatore = false;
 	private String padre = "";
 	private String madre = "";
 	private ArrayList figli = new ArrayList();
@@ -108,6 +109,7 @@ public class person {
 				String link = r.getAttribute("href");
 				person per = new person(nome, link);
 				per.setDinastia();
+				per.setImperatore();
 				per.setPadre();
 				per.setMadre();
 				per.setConiuge();
@@ -119,15 +121,18 @@ public class person {
 				this.figli.add(per);
 			}
 			
-			System.out.println("Nome: " + this.nome);
-			System.out.println("Dinastia: " + this.dinastia);
-			System.out.println("Madre: " + this.madre);
-			System.out.println("Padre: " + this.padre);
-			System.out.println("Coniugi: ");
-			printConiuge(getConiuge());
-			System.out.println("Figli: ");
-			printFigli(getFigli());
 		}
+		
+		System.out.println("Nome: " + this.nome);
+		System.out.println("Dinastia: " + this.dinastia);
+		if(this.imperatore) { System.out.println("E' un imperatore"); }
+		System.out.println("Madre: " + this.madre);
+		System.out.println("Padre: " + this.padre);
+		System.out.println("Coniugi: ");
+		printConiuge(getConiuge());
+		System.out.println("Figli: ");
+		printFigli(getFigli());
+		System.out.println("\n");
 		
 		// CLOSE THE WEB SITE
 		this.driver.quit();
@@ -203,8 +208,19 @@ public class person {
 		}
 	}
 	
+	public void setImperatore() {
+		// CHECK IF THE PERSON IS A IMPERATOR
+				for (WebElement t : this.tab) {
+					if (t.getText().equals("Regno")) {
+						// IF THE PERSON IS A IMPERATOR CHANGE YOUR STATUS
+						this.imperatore = true;
+					}
+				}
+	}
 
-	
+	public boolean checkImperatore() {
+		return this.imperatore;
+	}
 	
 	// STAMPE PER DEBUG
 	public void printConiuge(ArrayList l) {

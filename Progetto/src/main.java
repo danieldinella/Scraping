@@ -15,22 +15,15 @@ public class main {
 		
 		//input
 		Scanner sca = new Scanner(System.in);
-		String imp = "Augusto";
-		String link = "https://it.wikipedia.org/wiki/Augusto";
+		String imp = "Agrippina maggiore";
+		String link = "https://it.wikipedia.org/wiki/Agrippina_maggiore";
 		
 		person per = new person(imp, link);
 		per.setDinastia();
+		per.setImperatore();
 		per.setPadre();
 		per.setMadre();
 		per.setConiuge();
 		per.setFigli();
-		System.out.println("Nome: " + per.getNome());
-		System.out.println("Dinastia: " + per.getDinastia());
-		System.out.println("Madre: " + per.getMadre());
-		System.out.println("Padre: " + per.getPadre());
-		System.out.println("Coniugi: ");
-		per.printConiuge(per.getConiuge());
-		System.out.println("Figli: ");
-		per.printFigli(per.getFigli());
 	}
 }
