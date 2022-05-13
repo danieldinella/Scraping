@@ -212,7 +212,7 @@ public class person {
 		// CHECK IF THE PERSON IS A IMPERATOR
 				for (WebElement t : this.tab) {
 					if (t.getText().equals("Regno")) {
-						// IF THE PERSON IS A IMPERATOR CHANGE YOUR STATUS
+						// IF THE PERSON IS A IMPERATOR CHANGE HIS STATUS
 						this.imperatore = true;
 					}
 				}
