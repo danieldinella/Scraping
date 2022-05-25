@@ -19,7 +19,7 @@ public class Main {
 		String imp = "Gaio Giulio Cesare";
 		String link = "https://it.wikipedia.org/wiki/" + imp;
 		
-		person per = new person(imp, link);
+		Person per = new Person(imp, link);
 		per.setDinastia();
 		per.setImperatore();
 		per.setPadre();
@@ -27,8 +27,9 @@ public class Main {
 		per.setConiuge();
 		per.setFigli(); 
 		
-		// ############################################################### //
+		/*
 		TreeImage.processString(per, "");
 		TreeImage img = new TreeImage();
-		// ############################################################### //
+		*/
+	}
 }

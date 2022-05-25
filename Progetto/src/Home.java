@@ -159,6 +159,7 @@ public class Home extends javax.swing.JFrame {
         }
         
         String link = "https://it.wikipedia.org/wiki/" + s;
+
         
         try {
         	Person per = new Person(s, link);
@@ -175,12 +176,13 @@ public class Home extends javax.swing.JFrame {
         }
         catch (Exception e) {
         	i = -1;
-        }		
-		
+        }
         if (i == -1){
             JOptionPane.showMessageDialog(this, "Attention! The page wikipedia"
             		+ " not exist ...", "Attentio", 2);
         }
+        
+        
         else{
             Secondary window = new Secondary();
             window.show();

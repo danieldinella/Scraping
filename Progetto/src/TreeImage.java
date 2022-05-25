@@ -178,6 +178,7 @@ public class TreeImage {
 			}
 			
 			BufferedImage toDraw = null;
+		
 			if(nodes_list.get(i).hasImp()) {
 				try { toDraw = ImageIO.read(new File("_icons/imp_"+pick+".png")); } 
 				catch (IOException e) {	e.printStackTrace(); }
