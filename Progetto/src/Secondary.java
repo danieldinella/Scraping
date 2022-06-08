@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -13,7 +8,13 @@ import javax.imageio.ImageReader;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import com.google.common.io.Files;
+
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -23,6 +24,7 @@ import java.awt.image.BufferedImage;
 public class Secondary extends javax.swing.JFrame {
 	
 	ImageIcon i = new ImageIcon("history\\tree0.png");
+	String currentPath = "history\\tree0.png";
 
     /**
      * Creates new form Secondary
@@ -45,28 +47,52 @@ public class Secondary extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
+    	jFileChooser = new javax.swing.JFileChooser();
         lbImage = new javax.swing.JLabel();
         lbTitle1 = new javax.swing.JLabel();
         lbTitle2 = new javax.swing.JLabel();
+        lbTitle3 = new javax.swing.JLabel();
         btnSerch = new javax.swing.JButton();
         txtName = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        btnSearch2 = new javax.swing.JButton();
+        jMenuBar = new javax.swing.JMenuBar();
+        jMenu = new javax.swing.JMenu();
+        open = new javax.swing.JMenuItem();
+        save = new javax.swing.JMenuItem();
+        jScrollPane = new javax.swing.JScrollPane();
+        lbLegend = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbImage.setIcon(i); // NOI18N
+        lbImage.setHorizontalAlignment(JLabel.CENTER);
+        jScrollPane.setViewportView(lbImage);
+        jScrollPane.getViewport().setBackground(new java.awt.Color (190, 50, 52));
+        jScrollPane.setBorder(null);
+        
+        lbLegend.setIcon(new javax.swing.ImageIcon("legenda.png")); // NOI18N
+
 
         lbTitle1.setFont(new java.awt.Font("Castellar", 3, 14)); // NOI18N
         lbTitle1.setText("Here is his family tree! ");
+        lbTitle1.setForeground(new Color(255, 255, 255));
 
         lbTitle2.setFont(new java.awt.Font("Castellar", 3, 14)); // NOI18N
-        lbTitle2.setText("If you want, search here again:");
-
+        lbTitle2.setText("Choose the dynasty:");
+        lbTitle2.setForeground(new Color(255, 255, 255));
+        
+        lbTitle3.setFont(new java.awt.Font("Castellar", 3, 14)); // NOI18N
+        lbTitle3.setText("Search by name:");
+        lbTitle3.setForeground(new Color(255, 255, 255));
+        
         btnSerch.setText("Search");
         btnSerch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSerchActionPerformed(evt);
             }
         });
+        
         
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -86,45 +112,101 @@ public class Secondary extends javax.swing.JFrame {
                 txtNameKeyPressed(evt);
             }
         });
+        
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Augusto (Giulio Claudii,  27 a.C.-14 d.C.)", "Vespasiano (Flavii, 68-79)", "Adriano (Antonini, 117-138)", "Valeriano (Valeriani, 253-260)", "Costantino (Severi, 306-337)" }));
+
+        btnSearch2.setText("Search");
+        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch2ActionPerformed(evt);
+            }
+        });
+        
+        jMenu.setText("File");
+
+        open.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        open.setText("Open history");
+        open.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openActionPerformed(evt);
+            }
+        });
+        jMenu.add(open);
+
+        save.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        save.setText("Save");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
+        jMenu.add(save);
+
+        jMenuBar.add(jMenu);
+
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(lbTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(116, 116, 116))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(354, 354, 354)
+                .addComponent(lbTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 483, Short.MAX_VALUE)
+                .addComponent(lbLegend)
+                .addGap(43, 43, 43))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addComponent(btnSearch2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSerch)
+                .addGap(170, 170, 170))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(309, 309, 309)
-                        .addComponent(btnSerch))
+                        .addGap(47, 47, 47)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(lbTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(64, 64, 64)
+                        .addComponent(lbTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbTitle3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(121, 121, 121))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(lbTitle1)
-                .addGap(18, 18, 18)
-                .addComponent(lbImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbTitle2)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnSerch)
-                .addGap(25, 25, 25))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(lbTitle1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbLegend, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbTitle2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSearch2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbTitle3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSerch)))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -160,34 +242,64 @@ public class Secondary extends javax.swing.JFrame {
     private void btnSerchActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         String input = txtName.getText();
+        if (input.equals("Write a name...")){
+        	JOptionPane.showMessageDialog(this, "Error! Enter valid input...", "Error", 0);
+        }
+        else {
+	        int i = 0;
+	        String link = "https://it.wikipedia.org/wiki/" + input;
+	        
+	        try {
+	        	Person per = new Person(input, link);
+	        	per.setDinastia();
+	        	per.setImperatore();
+	        	per.setPadre();
+	        	per.setMadre();
+	        	per.setConiuge();
+	        	per.setFigli();
+			
+	        	StringProcessor.processString(per, "");
+	        	TreeImage.setCodifica(StringProcessor.getCodifica());
+	        	TreeImage.createImage(0);
+	        	TreeImage.resetCodifica();
+	        }
+	        catch (Exception e) {
+	        	i = -1;
+	        }
+			
+			
+	        if (i == -1){
+	            JOptionPane.showMessageDialog(this, "Attention! The page wikipedia"
+	            		+ " not exist ...", "Attention", 2);
+	        }
+	        else{
+	        	currentPath = "history\\tree" + c + ".png";
+	        	lbImage.setIcon(new javax.swing.ImageIcon(currentPath));       	
+	        	c++;
+	        }
+        }
+    }       
+    
+    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    	String input = (String) jComboBox1.getSelectedItem();
+    	input = input.substring(0, input.indexOf(' '));
         int i = 0;
         String link = "https://it.wikipedia.org/wiki/" + input;
         
         try {
         	Person per = new Person(input, link);
-        	if(per.checkImp()) {
-				Imperatore imp = new Imperatore(input, link, true);
-				imp.setDinastia();
-				imp.setPadre();
-				imp.setMadre();
-				imp.setConiuge();
-				
-				TreeImage.processString(imp, "");
-	        	TreeImage img = new TreeImage(c);
-	        	img.resetCodifica();
-			}
-			else {
-				per.setDinastia();
-				per.setPadre();
-				per.setMadre();
-				per.setConiuge();
-				
-				TreeImage.processString(per, "");
-	        	TreeImage img = new TreeImage(c);
-	        	img.resetCodifica();
-			}
+        	per.setDinastia();
+        	per.setImperatore();
+        	per.setPadre();
+        	per.setMadre();
+        	per.setConiuge();
+        	per.setFigli();
 		
-        	
+        	StringProcessor.processString(per, "");
+        	TreeImage.setCodifica(StringProcessor.getCodifica());
+        	TreeImage.createImage(0);
+        	TreeImage.resetCodifica();
         }
         catch (Exception e) {
         	i = -1;
@@ -196,14 +308,41 @@ public class Secondary extends javax.swing.JFrame {
 		
         if (i == -1){
             JOptionPane.showMessageDialog(this, "Attention! The page wikipedia"
-            		+ " not exist ...", "Attentio", 2);
+            		+ " not exist ...", "Attention", 2);
         }
         else{
-        	lbImage.setIcon(new javax.swing.ImageIcon("history\\tree" + c + ".png"));       	
+        	currentPath = "history\\tree" + c + ".png";
+        	lbImage.setIcon(new javax.swing.ImageIcon(currentPath));       	
         	c++;
         }
-		
-    }                                        
+    }     
+    
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        // TODO add your handling code here:
+    	jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+       	int response = jFileChooser.showOpenDialog(null);
+        if (response == jFileChooser.APPROVE_OPTION){
+            File f = new File(jFileChooser.getSelectedFile().getAbsolutePath() + "\\download" + c + ".png");
+            File curr = new File(currentPath);
+            try {
+            	Files.copy(curr, f);    
+            	JOptionPane.showMessageDialog(this, "Rescue successful!", "Success", 1);
+            }
+            catch (Exception e){
+            	JOptionPane.showMessageDialog(this, "Attention! File not exist ...", "Attention", 2);
+            }
+        }
+    	
+    } 
+    
+    private void openActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        // TODO add your handling code here:
+    	try {
+    		Desktop.getDesktop().open(new File("history"));
+        } catch (IOException ex) {
+        	JOptionPane.showMessageDialog(this, "Attention! Directory not exist ...", "Attention", 2);
+        }
+    } 
 
     /**
      * @param args the command line arguments
@@ -242,10 +381,20 @@ public class Secondary extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify                     
+    private javax.swing.JButton btnSearch2;
     private javax.swing.JButton btnSerch;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JFileChooser jFileChooser;
+    private javax.swing.JMenu jMenu;
+    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JLabel lbImage;
     private javax.swing.JLabel lbTitle1;
     private javax.swing.JLabel lbTitle2;
+    private javax.swing.JLabel lbTitle3;
+    private javax.swing.JMenuItem open;
+    private javax.swing.JMenuItem save;
     private javax.swing.JTextField txtName;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JLabel lbLegend;
     // End of variables declaration                   
 }

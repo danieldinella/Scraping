@@ -1,34 +1,29 @@
-import org.openqa.selenium.chrome.ChromeDriver; 
-import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByXPath;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import java.util.List;
-import java.util.Scanner;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.stream.Stream;
+import java.io.*;
 
 public class Main {
+
 	public static void main(String[] args) {
-		System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
+		// TODO Auto-generated method stub
 		
-		//input
-		Scanner sca = new Scanner(System.in);
-		String imp = "Gaio Giulio Cesare";
-		String link = "https://it.wikipedia.org/wiki/" + imp;
-		
-		Person per = new Person(imp, link);
-		per.setDinastia();
-		per.setPadre();
-		per.setMadre();
-		per.setConiuge();
-		per.setFigli(); 
-		
-		/*
-		TreeImage.processString(per, "");
-		TreeImage img = new TreeImage();
-		*/
+		File dir = new File("history");
+	      File[] files = dir.listFiles();
+	      FileFilter fileFilter = new FileFilter() {
+	         public boolean accept(File file) {
+	            return file.isDirectory();
+	         }
+	      };
+	      files = dir.listFiles(fileFilter);
+	      System.out.println(files.length);
+	      
+	      if (files.length == 0) {
+	         System.out.println("Either dir does not exist or is not a directory");
+	      } else {
+	         for (int i = 0; i< files.length; i++) {
+	            File filename = files[i];
+	            System.out.println(filename.toString());
+	         }
+	      }
+
 	}
+
 }

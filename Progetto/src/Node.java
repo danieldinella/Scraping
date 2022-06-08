@@ -3,39 +3,59 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Node {
-	private int tile_y;
+	/* Node Attributes
+	 * tile_y and tile_x attributes are useful for coordinate and rectangle placing calculations,
+	 * top and bottom are used when it comes to define the coordinates position of rectangle and
+	 * connection arrows drawing, their amount is defined by m_children.
+	 * imp tells if a node contains an emperor, this attribute is useful to pick the right icon,
+	 * while the text attribute contains the node full name and his/her spouses
+	 * RECT_H and RECT_B are constant values that are the rectangle base and height
+	 */
+	private int tile_y;	
 	private int tile_x;
 	private int[] top = {0, 0};
 	private int[] bottom = {0, 0};
 	private int n_children;
 	private boolean imp = false;
 	private String text;
-	private int RECT_H = 70;
-	private int RECT_B = 200;
+	private final int RECT_H = 70;
+	private final int RECT_B = 200;
 	
-	
-	public Node(String n, int tile_y, int tile_x, ArrayList<ArrayList<Integer>> tree_tiles_map, ArrayList<Integer> members_per_height, int img_width) {
+	/* NODE CONSTRUCTOR METHOD
+	 * This method defines all the Node object attributes values by calculating them 
+	 * starting from the given parameters.
+	 * The informations contained in the String t parameter will be extracted to be put into
+	 * the right parameters and then edited to put them in the text attribute.
+	 * The remaining parameters will be used to calculate coordinates 
+	 * 
+	 * @param t							The semi-processed text
+	 * @param tile_y 					Node y tile
+	 * @param tile_x    				Node x tile
+	 * @param members_per_height		Tells how many members there in the same y tile
+	 * @param img_width					The already calculated final image width 
+	 */
+	public Node(String t, int tile_y, int tile_x, ArrayList<Integer> members_per_height, int img_width) {
 		//NODE TILES
 		this.tile_x = tile_x;
 		this.tile_y = tile_y;
 		
 		//TEXT, N_CHILDREN AND IMP CALCULATION
-		if (n.contains(":")) {
-			int index = n.indexOf(":")+1;
-			this.n_children = Character.getNumericValue(n.charAt(index));
-			String childrenNotation = n.substring(index-5, index+1);
-			n = n.replace(childrenNotation, "");
+		if (t.contains(":")) {
+			int index = t.indexOf(":")+1;
+			this.n_children = Character.getNumericValue(t.charAt(index));
+			String childrenNotation = t.substring(index-5, index+1);
+			t = t.replace(childrenNotation, "");
 		}
-		n = n.replace("\t", "");
-		if (n.contains("*")) {	
-			n = n.replace("*", "");
+		t = t.replace("\t", "");
+		if (t.contains("*")) {	
+			t = t.replace("*", "");
 			this.imp = true;
 		}
-		if (n.contains("+ [")) {
-			n = n.replace("+", "").replace(",", " ");
-			n = n.replace("[", "").replace("]", "");
+		if (t.contains("+ [")) {
+			t = t.replace("+", "").replace(",", " ");
+			t = t.replace("[", "").replace("]", "");
 		}
-		this.text = n;
+		this.text = t;
 		
 		//TOP POINT CALCULATION
 		int border = 20;
