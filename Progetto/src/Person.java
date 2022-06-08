@@ -40,6 +40,20 @@ public class Person {
 				+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
 	}
 	
+	public Person(String nome, String link, boolean imperatore) {
+		//URL SETTINGS
+			System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--headless");
+			this.driver = new ChromeDriver(options);
+				
+		//ATTRIBUTES SETTINGS
+			this.nome = nome;
+			this.link = link;
+			this.driver.get(link);
+			this.tab = driver.findElements(By.xpath("//div[@id = 'mw-content-text']"
+						+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
+	}
 	
 	// GET METHODS
 	
@@ -65,10 +79,6 @@ public class Person {
 	
 	public ArrayList getConiuge() {
 		return this.coniuge;
-	}
-	
-	public boolean checkImperatore() {
-		return this.imperatore;
 	}
 
 	
@@ -102,6 +112,8 @@ public class Person {
 		// IF SONS' LINE EXISTS
 		if(i != -1) {
 			
+			System.out.println("ciao");
+			
 			// GET SONS' ATTRIBUTES
 			List<WebElement> riga = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']"
 					+ "/table[@class = 'sinottico']/tbody/tr["+i+"]/td/a"));
@@ -111,18 +123,36 @@ public class Person {
 				String nome = r.getText();
 				String link = r.getAttribute("href");
 				Person per = new Person(nome, link);
-				per.setDinastia();
-				per.setImperatore();
-				per.setPadre();
-				per.setMadre();
-				per.setConiuge();
-				
-				if (this.dinastia != "") {
-					per.setFigli();
+				if(per.checkImp()) {
+					Imperatore imp = new Imperatore(nome, link, true);
+					imp.setDinastia();
+					imp.setPadre();
+					imp.setMadre();
+					imp.setConiuge();
+					
+					if (imp.getDinastia() != "") {
+						imp.setFigli();
+					}
+					
+					// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
+					this.figli.add(imp);
+				}
+				else {
+					per.setDinastia();
+					per.setPadre();
+					per.setMadre();
+					per.setConiuge();
+					
+					if (this.dinastia != "") {
+						per.setFigli();
+					}
+					
+					// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
+					this.figli.add(per);
 				}
 				
-				// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
-				this.figli.add(per);
+				
+				
 			}
 			
 		}
@@ -217,14 +247,15 @@ public class Person {
 		}
 	}
 	
-	public void setImperatore() {
+	public boolean checkImp() {
 		// CHECK IF THE PERSON IS AN EMPEROR
 				for (WebElement t : this.tab) {
 					if (t.getText().equals("Regno")) {
 						// IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
-						this.imperatore = true;
+						return true;
 					}
 				}
+				return false;
 	}
 	
 	// STAMPE PER DEBUG

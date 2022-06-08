@@ -64,8 +64,29 @@ public class StringProcessor {
 	 */
 	public static void processString(Person root, String tabs) {
 		codifica += "\n" + tabs;
-		if(root.checkImperatore())
-			codifica += "*";
+		if(root.getFigli().isEmpty())
+			if(root.getConiuge().isEmpty()) 
+				codifica += (root.getNome());
+			else
+				codifica +=(root.getNome() + " + " + root.getConiuge());
+		else {
+			if(root.getConiuge().isEmpty())
+				codifica += (root.getNome());
+			else
+				codifica += (root.getNome() + " + " + root.getConiuge());
+			ArrayList<Person> figli = root.getFigli();
+			if(!root.getFigli().isEmpty())
+				codifica += (" N_F :"+figli.size());
+			tabs = tabs + "\t";
+			for(int i = 0; i < figli.size(); i++) {
+				processString(figli.get(i), tabs);
+			}
+		}
+	}
+	
+	public static void processString(Imperatore root, String tabs) {
+		codifica += "\n" + tabs;	
+		codifica += "*";
 		if(root.getFigli().isEmpty())
 			if(root.getConiuge().isEmpty()) 
 				codifica += (root.getNome());

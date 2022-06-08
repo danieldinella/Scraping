@@ -239,18 +239,34 @@ public class Home extends javax.swing.JFrame {
 	        
 	        try {
 	        	Person per = new Person(s, link);
-	        	per.setDinastia();
-	        	per.setImperatore();
-	        	per.setPadre();
-	        	per.setMadre();
-	        	per.setConiuge();
-	        	per.setFigli();
+	        	if (per.checkImp()) {
+	                	Imperatore imp = new Imperatore(s, link, true);
+	                	imp.setDinastia();
+	                	imp.setPadre();
+	                	imp.setMadre();
+	                	imp.setConiuge();
+	                	imp.setFigli();
+	                	//TreeImage.processString(per, "");
+	    	        	StringProcessor.processString(imp, "");
+	    	        	System.out.println(StringProcessor.getCodifica());
+	    	        	TreeImage.setCodifica(StringProcessor.getCodifica());
+	    	        	TreeImage.createImage(0);
+	    	        	TreeImage.resetCodifica();
+	               	}
+	                else {
+	                	per.setDinastia();
+	                    per.setPadre();
+	                   	per.setMadre();
+	                   	per.setConiuge();
+	                   	per.setFigli();
+	                   	//TreeImage.processString(per, "");
+	    	        	StringProcessor.processString(per, "");
+	    	        	System.out.println(StringProcessor.getCodifica());
+	    	        	TreeImage.setCodifica(StringProcessor.getCodifica());
+	    	        	TreeImage.createImage(0);
+	    	        	TreeImage.resetCodifica();	
+	                	}
 			
-	        	//TreeImage.processString(per, "");
-	        	StringProcessor.processString(per, "");
-	        	TreeImage.setCodifica(StringProcessor.getCodifica());
-	        	TreeImage.createImage(0);
-	        	TreeImage.resetCodifica();
 	        }
 	        catch (Exception e) {
 	        	i = -1;
@@ -303,17 +319,32 @@ public class Home extends javax.swing.JFrame {
         
         try {
         	Person per = new Person(input, link);
-        	per.setDinastia();
-        	per.setImperatore();
-        	per.setPadre();
-        	per.setMadre();
-        	per.setConiuge();
-        	per.setFigli();
+        	if(per.checkImp()) {
+				Imperatore imp = new Imperatore(input, link, true);
+				imp.setDinastia();
+				imp.setPadre();
+				imp.setMadre();
+				imp.setConiuge();
+				imp.setFigli();
+				
+				StringProcessor.processString(imp, "");
+	        	TreeImage.setCodifica(StringProcessor.getCodifica());
+	        	TreeImage.createImage(0);
+	        	TreeImage.resetCodifica();
+			}
+			else {
+				per.setDinastia();
+				per.setPadre();
+				per.setMadre();
+				per.setConiuge();
+				per.setFigli();
+				
+				StringProcessor.processString(per, "");
+	        	TreeImage.setCodifica(StringProcessor.getCodifica());
+	        	TreeImage.createImage(0);
+	        	TreeImage.resetCodifica();
+			}
 		
-        	StringProcessor.processString(per, "");
-        	TreeImage.setCodifica(StringProcessor.getCodifica());
-        	TreeImage.createImage(0);
-        	TreeImage.resetCodifica();
         }
         catch (Exception e) {
         	i = -1;
