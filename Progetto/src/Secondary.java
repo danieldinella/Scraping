@@ -165,16 +165,29 @@ public class Secondary extends javax.swing.JFrame {
         
         try {
         	Person per = new Person(input, link);
-        	per.setDinastia();
-        	per.setImperatore();
-        	per.setPadre();
-        	per.setMadre();
-        	per.setConiuge();
-        	per.setFigli();
+        	if(per.checkImp()) {
+				Imperatore imp = new Imperatore(input, link, true);
+				imp.setDinastia();
+				imp.setPadre();
+				imp.setMadre();
+				imp.setConiuge();
+				
+				TreeImage.processString(imp, "");
+	        	TreeImage img = new TreeImage(c);
+	        	img.resetCodifica();
+			}
+			else {
+				per.setDinastia();
+				per.setPadre();
+				per.setMadre();
+				per.setConiuge();
+				
+				TreeImage.processString(per, "");
+	        	TreeImage img = new TreeImage(c);
+	        	img.resetCodifica();
+			}
 		
-        	TreeImage.processString(per, "");
-        	TreeImage img = new TreeImage(c);
-        	img.resetCodifica();
+        	
         }
         catch (Exception e) {
         	i = -1;

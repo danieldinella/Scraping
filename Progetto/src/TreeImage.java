@@ -194,7 +194,34 @@ public class TreeImage {
 	public static void processString(Person root, String tabs) {
 		//System.out.print(tabs);
 		codifica += "\n" + tabs;
-		if(root.checkImperatore())
+		if(root.getFigli().isEmpty())
+			if(root.getConiuge().isEmpty()) 
+				//System.out.print(root.getNome() + "\n");
+				codifica += (root.getNome());
+			else
+				//System.out.print(root.getNome() + " + " + root.getConiuge() + "\n");
+				codifica +=(root.getNome() + " + " + root.getConiuge());
+		else {
+			if(root.getConiuge().isEmpty())
+				//System.out.print(root.getNome() + "\n");
+				codifica += (root.getNome());
+			else
+				//System.out.print(root.getNome() + " + " + root.getConiuge() + "\n");
+				codifica += (root.getNome() + " + " + root.getConiuge());
+			ArrayList<Person> figli = root.getFigli();
+			if(!root.getFigli().isEmpty())
+				codifica += (" N_F :"+figli.size());
+			tabs = tabs + "\t";
+			for(int i = 0; i < figli.size(); i++) {
+				processString(figli.get(i), tabs);
+			}
+		}
+	}
+	
+	public static void processString(Imperatore root, String tabs) {
+		//System.out.print(tabs);
+		codifica += "\n" + tabs;
+		if(root.getCheckImperatore())
 			//System.out.print("*");
 			codifica += "*";
 		if(root.getFigli().isEmpty())

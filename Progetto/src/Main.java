@@ -21,7 +21,6 @@ public class Main {
 		
 		Person per = new Person(imp, link);
 		per.setDinastia();
-		per.setImperatore();
 		per.setPadre();
 		per.setMadre();
 		per.setConiuge();

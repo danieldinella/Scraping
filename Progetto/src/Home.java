@@ -163,12 +163,23 @@ public class Home extends javax.swing.JFrame {
         
         try {
         	Person per = new Person(s, link);
-        	per.setDinastia();
-        	per.setImperatore();
-        	per.setPadre();
-        	per.setMadre();
-        	per.setConiuge();
-        	per.setFigli();
+        	if (per.checkImp()) {
+        		Imperatore imp = new Imperatore(s, link, true);
+        		imp.setDinastia();
+        		imp.setPadre();
+        		imp.setMadre();
+        		imp.setConiuge();
+        		imp.setFigli();
+        	}
+        	else {
+        		per.setDinastia();
+            	per.setPadre();
+            	per.setMadre();
+            	per.setConiuge();
+            	per.setFigli();
+        	}
+        		
+        	
 		
         	TreeImage.processString(per, "");
         	TreeImage img = new TreeImage(0);
