@@ -17,12 +17,12 @@ public class Person {
 	private String nome;
 	private String link;
 	private String dinastia = "";
-	private boolean imperatore = false;
 	private String padre = "";
 	private String madre = "";
 	private ArrayList figli = new ArrayList();
 	private ArrayList coniuge = new ArrayList();
 	private List<WebElement> tab;
+	private boolean checkImperatore;
 
 	// CONSTRUCTOR
 	public Person(String nome, String link) {
@@ -112,8 +112,6 @@ public class Person {
 		// IF SONS' LINE EXISTS
 		if(i != -1) {
 			
-			System.out.println("ciao");
-			
 			// GET SONS' ATTRIBUTES
 			List<WebElement> riga = driver.findElements(By.xpath("//div[@id = 'mw-content-text']/div[@class = 'mw-parser-output']"
 					+ "/table[@class = 'sinottico']/tbody/tr["+i+"]/td/a"));
@@ -123,12 +121,16 @@ public class Person {
 				String nome = r.getText();
 				String link = r.getAttribute("href");
 				Person per = new Person(nome, link);
+				per.setCheckImperatore();
 				if(per.checkImp()) {
+					per.closeDriver(per.getDriver());
 					Imperatore imp = new Imperatore(nome, link, true);
 					imp.setDinastia();
 					imp.setPadre();
 					imp.setMadre();
 					imp.setConiuge();
+					imp.setCheckImperatore();
+					imp.setMandato();
 					
 					if (imp.getDinastia() != "") {
 						imp.setFigli();
@@ -136,6 +138,22 @@ public class Person {
 					
 					// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
 					this.figli.add(imp);
+					
+					imp.closeDriver(imp.getDriver());
+					
+					// STAMPE PER DEBUG
+					
+					System.out.println("Nome: " + imp.getNome());
+					System.out.println("Dinastia: " + imp.getDinastia());
+					System.out.println("Madre: " + imp.getMadre());
+					System.out.println("Padre: " + imp.getPadre());
+					System.out.println("Coniugi: ");
+					imp.printConiuge(imp.getConiuge());
+					System.out.println("Figli: ");
+					imp.printFigli(imp.getFigli());
+					System.out.println("\n");
+					System.out.println("Mandato: " + imp.getMandato());
+					System.out.println("\n");
 				}
 				else {
 					per.setDinastia();
@@ -149,32 +167,43 @@ public class Person {
 					
 					// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
 					this.figli.add(per);
+					
+					per.closeDriver(per.getDriver());
+					
+					// STAMPE PER DEBUG
+					
+
+					System.out.println("Nome: " + per.getNome());
+					System.out.println("Dinastia: " + per.getDinastia());
+					System.out.println("Madre: " + per.getMadre());
+					System.out.println("Padre: " + per.getPadre());
+					System.out.println("Coniugi: ");
+					printConiuge(per.getConiuge());
+					System.out.println("Figli: ");
+					printFigli(per.getFigli());
+					System.out.println("\n");
+					
 				}
-				
-				
 				
 			}
 			
 		}
 		
-		// STAMPE PER DEBUG
+		
+		
+	}
 	
-
-		System.out.println(this);
-		System.out.println("Nome: " + this.nome);
-		System.out.println("Dinastia: " + this.dinastia);
-		if(this.imperatore) { System.out.println("E' un imperatore"); }
-		System.out.println("Madre: " + this.madre);
-		System.out.println("Padre: " + this.padre);
-		System.out.println("Coniugi: ");
-		printConiuge(getConiuge());
-		System.out.println("Figli: ");
-		printFigli(getFigli());
-		System.out.println("\n");
-		
-		
+	public void closeDriver(WebDriver driver) {
 		// CLOSE THE WEB SITE
-		this.driver.quit();
+		driver.quit();
+	}
+	
+	public List<WebElement> getTab(){
+		return this.tab;
+	}
+	
+	public WebDriver getDriver() {
+		return this.driver;
 	}
 	
 	public void setPadre() {
@@ -247,15 +276,18 @@ public class Person {
 		}
 	}
 	
-	public boolean checkImp() {
+	public void setCheckImperatore() {
 		// CHECK IF THE PERSON IS AN EMPEROR
-				for (WebElement t : this.tab) {
-					if (t.getText().equals("Regno")) {
-						// IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
-						return true;
-					}
-				}
-				return false;
+		for (WebElement t : this.tab) {
+			if (t.getText().equals("Regno")) {
+				// IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
+				this.checkImperatore = true;
+			}
+		}
+	}
+	
+	public boolean checkImp() {
+		return this.checkImperatore;
 	}
 	
 	// STAMPE PER DEBUG

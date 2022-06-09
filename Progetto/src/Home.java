@@ -239,7 +239,9 @@ public class Home extends javax.swing.JFrame {
 	        
 	        try {
 	        	Person per = new Person(s, link);
+	        	per.setCheckImperatore();
 	        	if (per.checkImp()) {
+	        			per.closeDriver(per.getDriver());
 	                	Imperatore imp = new Imperatore(s, link, true);
 	                	imp.setDinastia();
 	                	imp.setPadre();
@@ -319,13 +321,20 @@ public class Home extends javax.swing.JFrame {
         
         try {
         	Person per = new Person(input, link);
+        	per.setCheckImperatore();
         	if(per.checkImp()) {
+        		per.closeDriver(per.getDriver());
 				Imperatore imp = new Imperatore(input, link, true);
 				imp.setDinastia();
 				imp.setPadre();
 				imp.setMadre();
 				imp.setConiuge();
+				imp.setCheckImperatore();
+				imp.setMandato();
 				imp.setFigli();
+				imp.closeDriver(imp.getDriver());
+				System.out.println(imp.getNome());
+				System.out.println("mandato:" + imp.getMandato());
 				
 				StringProcessor.processString(imp, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());
@@ -338,6 +347,7 @@ public class Home extends javax.swing.JFrame {
 				per.setMadre();
 				per.setConiuge();
 				per.setFigli();
+				per.closeDriver(per.getDriver());
 				
 				StringProcessor.processString(per, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());

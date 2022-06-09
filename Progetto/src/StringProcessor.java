@@ -63,7 +63,8 @@ public class StringProcessor {
 	 * @param tabs 		Number of tabs for each line start, initial value = 0
 	 */
 	public static void processString(Person root, String tabs) {
-		codifica += "\n" + tabs;
+		System.out.println("1" + root.getNome());
+		codifica += "\n" + tabs;	
 		if(root.getFigli().isEmpty())
 			if(root.getConiuge().isEmpty()) 
 				codifica += (root.getNome());
@@ -74,40 +75,68 @@ public class StringProcessor {
 				codifica += (root.getNome());
 			else
 				codifica += (root.getNome() + " + " + root.getConiuge());
-			ArrayList<Person> figli = root.getFigli();
+			ArrayList figli = root.getFigli();
 			if(!root.getFigli().isEmpty())
 				codifica += (" N_F :"+figli.size());
 			tabs = tabs + "\t";
+			System.out.println("1,2");
+			System.out.println(figli);
 			for(int i = 0; i < figli.size(); i++) {
-				processString(figli.get(i), tabs);
+				Person fi = (Person) figli.get(i);
+				if(fi.checkImp()) {
+					System.out.println("1,3");
+					Imperatore imp = (Imperatore) figli.get(i);
+					processString(imp, tabs);
+				}
+				else {
+					System.out.println("1,4");
+					Person per = (Person) figli.get(i);
+					processString(per, tabs);
+				}
 			}
 		}
 	}
 	
 	public static void processString(Imperatore root, String tabs) {
+		System.out.println("1" + root.getNome());
 		codifica += "\n" + tabs;	
 		codifica += "*";
 		if(root.getFigli().isEmpty())
 			if(root.getConiuge().isEmpty()) 
-				codifica += (root.getNome());
+				codifica += (root.getNome() + " (" + root.getMandato() + ")");
 			else
-				codifica +=(root.getNome() + " + " + root.getConiuge());
+				codifica +=(root.getNome() + " (" + root.getMandato() + ")" + " + " + root.getConiuge());
 		else {
 			if(root.getConiuge().isEmpty())
-				codifica += (root.getNome());
+				codifica += (root.getNome() + " (" + root.getMandato() + ")");
 			else
-				codifica += (root.getNome() + " + " + root.getConiuge());
-			ArrayList<Person> figli = root.getFigli();
+				codifica += (root.getNome() + " (" + root.getMandato() + ")" + " + " + root.getConiuge());
+			ArrayList figli = root.getFigli();
 			if(!root.getFigli().isEmpty())
 				codifica += (" N_F :"+figli.size());
 			tabs = tabs + "\t";
+			System.out.println("1,2");
+			System.out.println(figli);
 			for(int i = 0; i < figli.size(); i++) {
-				processString(figli.get(i), tabs);
+				Person fi = (Person) figli.get(i);
+				if(fi.checkImp()) {
+					System.out.println("1,3");
+					Imperatore imp = (Imperatore) figli.get(i);
+					processString(imp, tabs);
+				}
+				else {
+					System.out.println("1,4");
+					Person per = (Person) figli.get(i);
+					processString(per, tabs);
+				}
 			}
 		}
 	}
 	
 	public static String getCodifica() {
+		System.out.println(codifica);
+		codifica = codifica.replace("null\n", "");
+		System.out.println(codifica);
 		return codifica;
 	}
 }

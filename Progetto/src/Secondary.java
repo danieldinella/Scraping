@@ -251,17 +251,39 @@ public class Secondary extends javax.swing.JFrame {
 	        
 	        try {
 	        	Person per = new Person(input, link);
-	        	per.setDinastia();
-	        	per.setImperatore();
-	        	per.setPadre();
-	        	per.setMadre();
-	        	per.setConiuge();
-	        	per.setFigli();
-			
-	        	StringProcessor.processString(per, "");
-	        	TreeImage.setCodifica(StringProcessor.getCodifica());
-	        	TreeImage.createImage(0);
-	        	TreeImage.resetCodifica();
+	        	per.setCheckImperatore();
+	        	if(per.checkImp()) {
+	        		per.closeDriver(per.getDriver());
+					Imperatore imp = new Imperatore(input, link, true);
+					imp.setDinastia();
+					imp.setPadre();
+					imp.setMadre();
+					imp.setConiuge();
+					imp.setCheckImperatore();
+					imp.setMandato();
+					imp.setFigli();
+					imp.closeDriver(imp.getDriver());
+					System.out.println(imp.getNome());
+					System.out.println("mandato:" + imp.getMandato());
+					
+					StringProcessor.processString(imp, "");
+		        	TreeImage.setCodifica(StringProcessor.getCodifica());
+		        	TreeImage.createImage(0);
+		        	TreeImage.resetCodifica();
+				}
+				else {
+					per.setDinastia();
+					per.setPadre();
+					per.setMadre();
+					per.setConiuge();
+					per.setFigli();
+					per.closeDriver(per.getDriver());
+					
+					StringProcessor.processString(per, "");
+		        	TreeImage.setCodifica(StringProcessor.getCodifica());
+		        	TreeImage.createImage(0);
+		        	TreeImage.resetCodifica();
+				}
 	        }
 	        catch (Exception e) {
 	        	i = -1;
@@ -289,17 +311,39 @@ public class Secondary extends javax.swing.JFrame {
         
         try {
         	Person per = new Person(input, link);
-        	per.setDinastia();
-        	per.setImperatore();
-        	per.setPadre();
-        	per.setMadre();
-        	per.setConiuge();
-        	per.setFigli();
-		
-        	StringProcessor.processString(per, "");
-        	TreeImage.setCodifica(StringProcessor.getCodifica());
-        	TreeImage.createImage(0);
-        	TreeImage.resetCodifica();
+        	per.setCheckImperatore();
+        	if(per.checkImp()) {
+        		per.closeDriver(per.getDriver());
+				Imperatore imp = new Imperatore(input, link, true);
+				imp.setDinastia();
+				imp.setPadre();
+				imp.setMadre();
+				imp.setConiuge();
+				imp.setCheckImperatore();
+				imp.setMandato();
+				imp.setFigli();
+				imp.closeDriver(imp.getDriver());
+				System.out.println(imp.getNome());
+				System.out.println("mandato:" + imp.getMandato());
+				
+				StringProcessor.processString(imp, "");
+	        	TreeImage.setCodifica(StringProcessor.getCodifica());
+	        	TreeImage.createImage(0);
+	        	TreeImage.resetCodifica();
+			}
+			else {
+				per.setDinastia();
+				per.setPadre();
+				per.setMadre();
+				per.setConiuge();
+				per.setFigli();
+				per.closeDriver(per.getDriver());
+				
+				StringProcessor.processString(per, "");
+	        	TreeImage.setCodifica(StringProcessor.getCodifica());
+	        	TreeImage.createImage(0);
+	        	TreeImage.resetCodifica();
+			}
         }
         catch (Exception e) {
         	i = -1;
