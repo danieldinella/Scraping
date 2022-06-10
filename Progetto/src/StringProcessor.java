@@ -100,7 +100,7 @@ public class StringProcessor {
 	public static void processString(Imperatore root, String tabs) {
 		System.out.println("1" + root.getNome());
 		codifica += "\n" + tabs;	
-		codifica += "*";
+		codifica += " *";
 		if(root.getFigli().isEmpty())
 			if(root.getConiuge().isEmpty()) 
 				codifica += (root.getNome() + " (" + root.getMandato() + ")");
@@ -134,7 +134,6 @@ public class StringProcessor {
 	}
 	
 	public static String getCodifica() {
-		System.out.println(codifica);
 		codifica = codifica.replace("null\n", "");
 		System.out.println(codifica);
 		return codifica;

@@ -113,7 +113,7 @@ public class Secondary extends javax.swing.JFrame {
             }
         });
         
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Augusto (Giulio Claudii,  27 a.C.-14 d.C.)", "Vespasiano (Flavii, 68-79)", "Adriano (Antonini, 117-138)", "Valeriano (Valeriani, 253-260)", "Costantino (Severi, 306-337)" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Augusto (Giulio Claudii,  27 a.C.-14 d.C.)", "Vespasiano (Flavii, 68-79)", "Adriano (Antonini, 117-138)", "Settimio_Severo (Severi, 193-211)", "Valeriano (Valeriani, 253-260)", "Costantino (Costantiniani, 306-337)" }));
 
         btnSearch2.setText("Search");
         btnSearch2.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +268,7 @@ public class Secondary extends javax.swing.JFrame {
 					
 					StringProcessor.processString(imp, "");
 		        	TreeImage.setCodifica(StringProcessor.getCodifica());
-		        	TreeImage.createImage(0);
+		        	TreeImage.createImage(c);
 		        	TreeImage.resetCodifica();
 				}
 				else {
@@ -281,8 +281,9 @@ public class Secondary extends javax.swing.JFrame {
 					
 					StringProcessor.processString(per, "");
 		        	TreeImage.setCodifica(StringProcessor.getCodifica());
-		        	TreeImage.createImage(0);
+		        	TreeImage.createImage(c);
 		        	TreeImage.resetCodifica();
+		        	System.out.println(StringProcessor.getCodifica());
 				}
 	        }
 	        catch (Exception e) {
@@ -328,7 +329,7 @@ public class Secondary extends javax.swing.JFrame {
 				
 				StringProcessor.processString(imp, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());
-	        	TreeImage.createImage(0);
+	        	TreeImage.createImage(c);
 	        	TreeImage.resetCodifica();
 			}
 			else {
@@ -341,7 +342,7 @@ public class Secondary extends javax.swing.JFrame {
 				
 				StringProcessor.processString(per, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());
-	        	TreeImage.createImage(0);
+	        	TreeImage.createImage(c);
 	        	TreeImage.resetCodifica();
 			}
         }

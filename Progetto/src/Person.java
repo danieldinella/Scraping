@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import com.google.common.graph.ElementOrder.Type;
 
+import io.opentelemetry.exporter.logging.SystemOutLogExporter;
+
 public class Person {
 	
 	private ChromeOptions options = new ChromeOptions();
@@ -118,73 +120,75 @@ public class Person {
 			
 			// SET NEW PERSON OBJECT WITH SONS' ATTRIBUTES
 			for (WebElement r : riga) {
-				String nome = r.getText();
-				String link = r.getAttribute("href");
-				Person per = new Person(nome, link);
-				per.setCheckImperatore();
-				if(per.checkImp()) {
-					per.closeDriver(per.getDriver());
-					Imperatore imp = new Imperatore(nome, link, true);
-					imp.setDinastia();
-					imp.setPadre();
-					imp.setMadre();
-					imp.setConiuge();
-					imp.setCheckImperatore();
-					imp.setMandato();
-					
-					if (imp.getDinastia() != "") {
-						imp.setFigli();
+				if (!r.getText().equals("Adottivi") && !r.getText().equals("Adottivi:")) {
+					String nome = r.getText();
+					String link = r.getAttribute("href");
+					Person per = new Person(nome, link);
+					per.setCheckImperatore();
+					if(per.checkImp()) {
+						per.closeDriver(per.getDriver());
+						Imperatore imp = new Imperatore(nome, link, true);
+						imp.setDinastia();
+						imp.setPadre();
+						System.out.println("NOME IMPERATORE: " + imp.getNome());
+						imp.setMadre();
+						imp.setConiuge();
+						imp.setCheckImperatore();
+						imp.setMandato();
+						
+						if (imp.getDinastia() != "") {
+							imp.setFigli();
+						}
+						
+						// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
+						this.figli.add(imp);
+						
+						imp.closeDriver(imp.getDriver());
+						
+						// STAMPE PER DEBUG
+						
+						System.out.println("Nome: " + imp.getNome());
+						System.out.println("Dinastia: " + imp.getDinastia());
+						System.out.println("Madre: " + imp.getMadre());
+						System.out.println("Padre: " + imp.getPadre());
+						System.out.println("Coniugi: ");
+						imp.printConiuge(imp.getConiuge());
+						System.out.println("Figli: ");
+						imp.printFigli(imp.getFigli());
+						System.out.println("\n");
+						System.out.println("Mandato: " + imp.getMandato());
+						System.out.println("\n");
 					}
-					
-					// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
-					this.figli.add(imp);
-					
-					imp.closeDriver(imp.getDriver());
-					
-					// STAMPE PER DEBUG
-					
-					System.out.println("Nome: " + imp.getNome());
-					System.out.println("Dinastia: " + imp.getDinastia());
-					System.out.println("Madre: " + imp.getMadre());
-					System.out.println("Padre: " + imp.getPadre());
-					System.out.println("Coniugi: ");
-					imp.printConiuge(imp.getConiuge());
-					System.out.println("Figli: ");
-					imp.printFigli(imp.getFigli());
-					System.out.println("\n");
-					System.out.println("Mandato: " + imp.getMandato());
-					System.out.println("\n");
-				}
-				else {
-					per.setDinastia();
-					per.setPadre();
-					per.setMadre();
-					per.setConiuge();
-					
-					if (this.dinastia != "") {
-						per.setFigli();
-					}
-					
-					// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
-					this.figli.add(per);
-					
-					per.closeDriver(per.getDriver());
-					
-					// STAMPE PER DEBUG
-					
+					else {
+						per.setDinastia();
+						per.setPadre();
+						per.setMadre();
+						per.setConiuge();
+						
+						if (this.dinastia != "") {
+							per.setFigli();
+						}
+						
+						// ADD SON OBJECT TO SONS' ARRAYLIST OF THE DAD
+						this.figli.add(per);
+						
+						per.closeDriver(per.getDriver());
+						
+						// STAMPE PER DEBUG
+						
 
-					System.out.println("Nome: " + per.getNome());
-					System.out.println("Dinastia: " + per.getDinastia());
-					System.out.println("Madre: " + per.getMadre());
-					System.out.println("Padre: " + per.getPadre());
-					System.out.println("Coniugi: ");
-					printConiuge(per.getConiuge());
-					System.out.println("Figli: ");
-					printFigli(per.getFigli());
-					System.out.println("\n");
-					
+						System.out.println("Nome: " + per.getNome());
+						System.out.println("Dinastia: " + per.getDinastia());
+						System.out.println("Madre: " + per.getMadre());
+						System.out.println("Padre: " + per.getPadre());
+						System.out.println("Coniugi: ");
+						printConiuge(per.getConiuge());
+						System.out.println("Figli: ");
+						printFigli(per.getFigli());
+						System.out.println("\n");
+						
+					}
 				}
-				
 			}
 			
 		}
@@ -244,7 +248,7 @@ public class Person {
 		// IF MOM'S LINE EXISTS THEN SET IT
 		if(i != -1) {
 			this.madre = driver.findElement(By.xpath("//div[@id = 'mw-content-text']"
-					+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+i+"]/td/a")).getText();
+					+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr["+i+"]/td")).getText();
 		}
 	}
 

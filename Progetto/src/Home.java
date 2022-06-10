@@ -109,7 +109,7 @@ public class Home extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "By dinastry", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel2.setToolTipText("");
         
-        jCombBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Augusto (Giulio Claudii,  27 a.C.-14 d.C.)", "Vespasiano (Flavii, 68-79)", "Adriano (Antonini, 117-138)", "Valeriano (Valeriani, 253-260)", "Costantino (Severi, 306-337)" }));
+        jCombBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Augusto (Giulio Claudii,  27 a.C.-14 d.C.)", "Vespasiano (Flavii, 68-79)", "Adriano (Antonini, 117-138)", "Settimio_Severo (Severi, 193-211)", "Valeriano (Valeriani, 253-260)", "Costantino (Costantiniana, 306-337)" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -247,6 +247,8 @@ public class Home extends javax.swing.JFrame {
 	                	imp.setPadre();
 	                	imp.setMadre();
 	                	imp.setConiuge();
+	                	imp.setCheckImperatore();
+	                	imp.setMandato();
 	                	imp.setFigli();
 	                	//TreeImage.processString(per, "");
 	    	        	StringProcessor.processString(imp, "");
@@ -254,6 +256,18 @@ public class Home extends javax.swing.JFrame {
 	    	        	TreeImage.setCodifica(StringProcessor.getCodifica());
 	    	        	TreeImage.createImage(0);
 	    	        	TreeImage.resetCodifica();
+	    	        	
+	    	        	System.out.println("Nome: " + imp.getNome());
+						System.out.println("Dinastia: " + imp.getDinastia());
+						System.out.println("Madre: " + imp.getMadre());
+						System.out.println("Padre: " + imp.getPadre());
+						System.out.println("Coniugi: ");
+						imp.printConiuge(imp.getConiuge());
+						System.out.println("Figli: ");
+						System.out.println(imp.getFigli());
+						System.out.println("\n");
+						System.out.println("Mandato: " + imp.getMandato());
+						System.out.println("\n");
 	               	}
 	                else {
 	                	per.setDinastia();

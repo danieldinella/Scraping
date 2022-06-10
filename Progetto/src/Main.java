@@ -3,27 +3,25 @@ import java.io.*;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		File dir = new File("history");
-	      File[] files = dir.listFiles();
-	      FileFilter fileFilter = new FileFilter() {
-	         public boolean accept(File file) {
-	            return file.isDirectory();
-	         }
-	      };
-	      files = dir.listFiles(fileFilter);
-	      System.out.println(files.length);
-	      
-	      if (files.length == 0) {
-	         System.out.println("Either dir does not exist or is not a directory");
-	      } else {
-	         for (int i = 0; i< files.length; i++) {
-	            File filename = files[i];
-	            System.out.println(filename.toString());
-	         }
-	      }
-
+		String nome = "Settimio Severo";
+		String link = "https://it.wikipedia.org/wiki/Settimio_Severo";
+		Imperatore imp = new Imperatore(nome, link, true);
+    	imp.setDinastia();
+    	imp.setPadre();
+    	imp.setMadre();
+    	imp.setConiuge();
+    	imp.setFigli();
+    	System.out.println("Nome: " + imp.getNome());
+		System.out.println("Dinastia: " + imp.getDinastia());
+		System.out.println("Madre: " + imp.getMadre());
+		System.out.println("Padre: " + imp.getPadre());
+		System.out.println("Coniugi: ");
+		imp.printConiuge(imp.getConiuge());
+		System.out.println("Figli: ");
+		imp.printFigli(imp.getFigli());
+		System.out.println("\n");
+		System.out.println("Mandato: " + imp.getMandato());
+		System.out.println("\n");
 	}
 
 }
