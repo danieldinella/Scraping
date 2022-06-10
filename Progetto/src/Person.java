@@ -283,7 +283,7 @@ public class Person {
 	public void setCheckImperatore() {
 		// CHECK IF THE PERSON IS AN EMPEROR
 		for (WebElement t : this.tab) {
-			if (t.getText().equals("Regno")) {
+			if (t.getText().equals("Regno") | t.getText().equals("In carica")) {
 				// IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
 				this.checkImperatore = true;
 			}

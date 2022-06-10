@@ -28,6 +28,9 @@ public class Imperatore extends Person{
 			if (t.getText().equals("Regno")) {
 				i = j + 1;
 			}
+			if(t.getText().equals("In carica")){
+				i = j + 1;
+			}
 			else {
 				j++;
 			}
@@ -48,7 +51,9 @@ public class Imperatore extends Person{
 					numeri.add(x.getText());
 				}
 			}
-			this.mandato = this.mandato.concat(numeri.get(0) + "-" + numeri.get(numeri.size() - 1));
+			if(!numeri.isEmpty()) {
+				this.mandato = this.mandato.concat(numeri.get(0) + "-" + numeri.get(numeri.size() - 1));
+			}
 		}	
 	}
 	
