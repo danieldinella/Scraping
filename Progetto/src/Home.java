@@ -238,6 +238,7 @@ public class Home extends javax.swing.JFrame {
 	        String link = "https://it.wikipedia.org/wiki/" + s;
 	        
 	        try {
+	        	StringProcessor.resetCodifica();
 	        	Person per = new Person(s, link);
 	        	per.setCheckImperatore();
 	        	if (per.checkImp()) {
@@ -250,12 +251,11 @@ public class Home extends javax.swing.JFrame {
 	                	imp.setCheckImperatore();
 	                	imp.setMandato();
 	                	imp.setFigli();
-	                	//TreeImage.processString(per, "");
+
 	    	        	StringProcessor.processString(imp, "");
 	    	        	System.out.println(StringProcessor.getCodifica());
 	    	        	TreeImage.setCodifica(StringProcessor.getCodifica());
 	    	        	TreeImage.createImage(0);
-	    	        	TreeImage.resetCodifica();
 	    	        	
 	    	        	System.out.println("Nome: " + imp.getNome());
 						System.out.println("Dinastia: " + imp.getDinastia());
@@ -280,7 +280,6 @@ public class Home extends javax.swing.JFrame {
 	    	        	System.out.println(StringProcessor.getCodifica());
 	    	        	TreeImage.setCodifica(StringProcessor.getCodifica());
 	    	        	TreeImage.createImage(0);
-	    	        	TreeImage.resetCodifica();	
 	                	}
 			
 	        }
@@ -334,6 +333,7 @@ public class Home extends javax.swing.JFrame {
         }
         
         try {
+        	StringProcessor.resetCodifica();
         	Person per = new Person(input, link);
         	per.setCheckImperatore();
         	if(per.checkImp()) {
@@ -353,7 +353,6 @@ public class Home extends javax.swing.JFrame {
 				StringProcessor.processString(imp, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());
 	        	TreeImage.createImage(0);
-	        	TreeImage.resetCodifica();
 			}
 			else {
 				per.setDinastia();
@@ -366,7 +365,6 @@ public class Home extends javax.swing.JFrame {
 				StringProcessor.processString(per, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());
 	        	TreeImage.createImage(0);
-	        	TreeImage.resetCodifica();
 			}
 		
         }

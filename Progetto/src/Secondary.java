@@ -250,6 +250,7 @@ public class Secondary extends javax.swing.JFrame {
 	        String link = "https://it.wikipedia.org/wiki/" + input;
 	        
 	        try {
+	        	StringProcessor.resetCodifica();
 	        	Person per = new Person(input, link);
 	        	per.setCheckImperatore();
 	        	if(per.checkImp()) {
@@ -269,7 +270,6 @@ public class Secondary extends javax.swing.JFrame {
 					StringProcessor.processString(imp, "");
 		        	TreeImage.setCodifica(StringProcessor.getCodifica());
 		        	TreeImage.createImage(c);
-		        	TreeImage.resetCodifica();
 				}
 				else {
 					per.setDinastia();
@@ -282,7 +282,6 @@ public class Secondary extends javax.swing.JFrame {
 					StringProcessor.processString(per, "");
 		        	TreeImage.setCodifica(StringProcessor.getCodifica());
 		        	TreeImage.createImage(c);
-		        	TreeImage.resetCodifica();
 		        	System.out.println(StringProcessor.getCodifica());
 				}
 	        }
@@ -311,6 +310,7 @@ public class Secondary extends javax.swing.JFrame {
         String link = "https://it.wikipedia.org/wiki/" + input;
         
         try {
+        	StringProcessor.resetCodifica();
         	Person per = new Person(input, link);
         	per.setCheckImperatore();
         	if(per.checkImp()) {
@@ -330,7 +330,6 @@ public class Secondary extends javax.swing.JFrame {
 				StringProcessor.processString(imp, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());
 	        	TreeImage.createImage(c);
-	        	TreeImage.resetCodifica();
 			}
 			else {
 				per.setDinastia();
@@ -343,7 +342,6 @@ public class Secondary extends javax.swing.JFrame {
 				StringProcessor.processString(per, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());
 	        	TreeImage.createImage(c);
-	        	TreeImage.resetCodifica();
 			}
         }
         catch (Exception e) {

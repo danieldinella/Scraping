@@ -258,7 +258,7 @@ public class Person {
 		int i = -1;
 		int j = 1;
 		for (WebElement t : this.tab) {
-			if (t.getText().equals("Coniuge") | t.getText().equals("Coniugi")) {
+			if (t.getText().equals("Coniuge") | t.getText().equals("Coniugi") | t.getText().equals("Consorte") | t.getText().equals("Consorti")) {
 				i = j + 1;
 			}
 			else {

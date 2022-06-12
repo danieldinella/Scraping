@@ -38,9 +38,14 @@ public class TreeImage {
 		System.out.println("--------------------------------------------------------------------------------");
 		System.out.println(StringProcessor.getCodifica());
 		
-		//CODIFICA LINES GET SEPARETED TO MAKE THEM EASIER TO HANDLE
+		//CODIFICA LINES GET SEPARETED TO MAKE THEM EASIER TO HANDLE 
 		ArrayList<String> lines = StringProcessor.separate(codifica.substring(1), "\n");
         
+		//DUPLICATE LINES GET REMOVED
+		lines = StringProcessor.removeDuplicates(lines);
+		for(int i = 0; i < lines.size(); i++)
+			System.out.println(lines.get(i));
+		
         //TREE HEIGHT CALCULATION
         tree_height = calcHeight(lines);
         
@@ -60,10 +65,11 @@ public class TreeImage {
         //NODES CREATION
         createNodes(lines);
         
+        
         img = new BufferedImage(img_width, img_height, BufferedImage.TYPE_INT_RGB);
         g2d = (Graphics2D) img.getGraphics();
         g2d.setColor(new Color(190, 50, 52));
-        g2d.fillRect(0, 0, img_width, img_height);
+        g2d.fillRect(0, 0, img.getWidth(), img.getHeight());
         drawNodes(nodes_list, g2d);
         
         try {
@@ -158,6 +164,7 @@ public class TreeImage {
 	 * @param lines		all the lines from codifica	
 	 */
 	public static void createNodes(ArrayList<String> lines) {
+		nodes_list.clear();
 		for(int i = 0; i<tree_tiles_map.size(); i++) {
         	int y = tree_tiles_map.get(i).get(0);
         	int x = tree_tiles_map.get(i).get(1);
@@ -184,10 +191,7 @@ public class TreeImage {
 	 * @param g2d			the actor object that draws the image
 	 */
 	public static void drawNodes(ArrayList<Node> nodes_list, Graphics2D g2d) {
-		int base; 
-		int height; 
-		int x_start;
-		int y_start;
+		int base, height, x_start, y_start;
 		for(int i=0; i < nodes_list.size(); i++) {
 			base = nodes_list.get(i).getRECT_B();
 			height = nodes_list.get(i).getRECT_H();
@@ -203,11 +207,15 @@ public class TreeImage {
 			g2d.drawRect(x_start+1, y_start+1, base, height);
 			//3
 			int n_frecce = 0;
-			for(int j=i;  n_frecce < nodes_list.get(i).getN_children(); j++) {
+			boolean cond = true;
+			for(int j=i+1;  n_frecce < nodes_list.get(i).getN_children() && cond && j < nodes_list.size(); j++) {
 				if(nodes_list.get(i).getTileY() == (nodes_list.get(j).getTileY()-1)) {
 					n_frecce++;
 					g2d.drawLine(nodes_list.get(i).getBtmX(), nodes_list.get(i).getBtmY(), nodes_list.get(j).getTopX(), nodes_list.get(j).getTopY());
 					g2d.drawLine(nodes_list.get(i).getBtmX()+1, nodes_list.get(i).getBtmY()+1, nodes_list.get(j).getTopX()+1, nodes_list.get(j).getTopY()+1);
+				}
+				else if (nodes_list.get(i).getTileY() == (nodes_list.get(j).getTileY()) || j >= nodes_list.size()) {
+					cond = false;
 				}
 			}
 			//4
@@ -240,7 +248,7 @@ public class TreeImage {
 	public static void setCodifica(String s) {
 		codifica = s;
 	}
-	public static void resetCodifica() {
-		codifica = "";
+	public static String getCodifica() {
+		return codifica;
 	}
 }

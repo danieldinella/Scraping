@@ -3,13 +3,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Node {
-	/* Node Attributes
-	 * tile_y and tile_x attributes are useful for coordinate and rectangle placing calculations,
-	 * top and bottom are used when it comes to define the coordinates position of rectangle and
-	 * connection arrows drawing, their amount is defined by m_children.
-	 * imp tells if a node contains an emperor, this attribute is useful to pick the right icon,
-	 * while the text attribute contains the node full name and his/her spouses
-	 * RECT_H and RECT_B are constant values that are the rectangle base and height
+	/* int tile_y and tile_x attributes
+	 *  Useful for coordinate, rectangle placing and arrow pointing calculations
+	 * int[] top and bottom attributes
+	 *  Used when it comes to define the coordinates position of rectangle and
+	 *  connection arrows drawing
+	 * int n_children attribute
+	 *  Specifies the number of outgoing arrows from a node, doesn't work in duplicate
+	 *  nodes
+	 * boolean imp attribute
+	 *  1 = Was an Emperor, 0 = Wasn't an Emperor 
+	 *  
 	 */
 	private int tile_y;	
 	private int tile_x;
@@ -40,10 +44,10 @@ public class Node {
 		this.tile_y = tile_y;
 		
 		//TEXT, N_CHILDREN AND IMP CALCULATION
-		if (t.contains(":")) {
+		if (t.contains(":")) {		    
 			int index = t.indexOf(":")+1;
-			this.n_children = Character.getNumericValue(t.charAt(index));
-			String childrenNotation = t.substring(index-5, index+1);
+			this.n_children = Integer.parseInt(t.substring(index, index+2).replace(" ", ""));
+			String childrenNotation = t.substring(index-5, index+2);
 			t = t.replace(childrenNotation, "");
 		}
 		t = t.replace("\t", "");
