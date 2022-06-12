@@ -236,8 +236,7 @@ public class Home extends javax.swing.JFrame {
 	        	// composition of the data of the person or emperor sought
 	        	StringProcessor.resetCodifica();
 	        	Person per = new Person(s, link);
-	        	per.setCheckImperatore();
-	        	if (per.checkImp()) {  // if the name sought is the name of an emperor
+	        	if (per.getCheckImp()) {  // if the name sought is the name of an emperor
 	        			per.closeDriver(per.getDriver());
 	        			// get the emperor's information
 	                	Imperatore imp = new Imperatore(s, link, true);
@@ -329,8 +328,7 @@ public class Home extends javax.swing.JFrame {
         	// composition of the data of the person or emperor sought
         	StringProcessor.resetCodifica();
         	Person per = new Person(input, link);
-        	per.setCheckImperatore();
-        	if(per.checkImp()) { // if the name sought is the name of an emperor
+        	if(per.getCheckImp()) { // if the name sought is the name of an emperor
         		per.closeDriver(per.getDriver());
         		// get the emperor's information
 				Imperatore imp = new Imperatore(input, link, true);

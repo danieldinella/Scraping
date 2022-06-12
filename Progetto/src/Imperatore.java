@@ -11,13 +11,18 @@ public class Imperatore extends Person{
 	private boolean checkImperatore;
 	private String mandato = "";
 
-	// CONSTRUCTOR
+	/**
+	 * Creates an object Imperatore with a given name, link and e
+	 * @param nome
+	 * @param link
+	 * @param imperatore
+	 */
 	public Imperatore(String nome, String link, boolean imperatore) {
 		super(nome, link);
 		this.checkImperatore = true;
 	}
 	
-	// GET METHOD
+
 	public boolean getCheckImperatore() {
 		return this.checkImperatore;
 	}
@@ -26,12 +31,22 @@ public class Imperatore extends Person{
 		return this.mandato;
 	}
 
+	public void setCheckImperatore() {
+        // CHECK IF THE PERSON IS AN EMPEROR
+        for (WebElement t : super.getWikiTab()) {
+            if (t.getText().equals("Regno") | t.getText().equals("In carica")) {
+                // IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
+                this.checkImperatore = true;
+            }
+        }
+    }
+	
 	// SET METHOD
 	public void setMandato() {
 		// GET NUMBER OF REIGN'S TABLE LINE
 		int i = -1;
 		int j = 1;
-		for (WebElement t : super.getTab()) {
+		for (WebElement t : super.getWikiTab()) {
 			if (t.getText().equals("Regno")) {
 				i = j + 1;
 			}

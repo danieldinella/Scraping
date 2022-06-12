@@ -25,7 +25,7 @@ public class Node {
 	private final int RECT_H = 70;
 	private final int RECT_B = 200;
 	
-	/* NODE CONSTRUCTOR METHOD
+	/** NODE CONSTRUCTOR METHOD
 	 * This method defines all the Node object attributes values by calculating them 
 	 * starting from the given parameters.
 	 * The informations contained in the String t parameter will be extracted to be put into
