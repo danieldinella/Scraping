@@ -45,7 +45,6 @@ public class Imperatore extends Person{
 			
 			for (WebElement x : anno) {
 				String appo = x.getText();
-				System.out.println(appo);
 				char c = appo.charAt(0);
 				if(Character.isDigit(c)) {
 					numeri.add(x.getText());

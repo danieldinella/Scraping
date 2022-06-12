@@ -130,7 +130,6 @@ public class Person {
 						Imperatore imp = new Imperatore(nome, link, true);
 						imp.setDinastia();
 						imp.setPadre();
-						System.out.println("NOME IMPERATORE: " + imp.getNome());
 						imp.setMadre();
 						imp.setConiuge();
 						imp.setCheckImperatore();
@@ -145,19 +144,7 @@ public class Person {
 						
 						imp.closeDriver(imp.getDriver());
 						
-						// STAMPE PER DEBUG
 						
-						System.out.println("Nome: " + imp.getNome());
-						System.out.println("Dinastia: " + imp.getDinastia());
-						System.out.println("Madre: " + imp.getMadre());
-						System.out.println("Padre: " + imp.getPadre());
-						System.out.println("Coniugi: ");
-						imp.printConiuge(imp.getConiuge());
-						System.out.println("Figli: ");
-						imp.printFigli(imp.getFigli());
-						System.out.println("\n");
-						System.out.println("Mandato: " + imp.getMandato());
-						System.out.println("\n");
 					}
 					else {
 						per.setDinastia();
@@ -173,19 +160,6 @@ public class Person {
 						this.figli.add(per);
 						
 						per.closeDriver(per.getDriver());
-						
-						// STAMPE PER DEBUG
-						
-
-						System.out.println("Nome: " + per.getNome());
-						System.out.println("Dinastia: " + per.getDinastia());
-						System.out.println("Madre: " + per.getMadre());
-						System.out.println("Padre: " + per.getPadre());
-						System.out.println("Coniugi: ");
-						printConiuge(per.getConiuge());
-						System.out.println("Figli: ");
-						printFigli(per.getFigli());
-						System.out.println("\n");
 						
 					}
 				}
@@ -292,18 +266,5 @@ public class Person {
 	
 	public boolean checkImp() {
 		return this.checkImperatore;
-	}
-	
-	// STAMPE PER DEBUG
-	public void printConiuge(ArrayList l) {
-		for (int x = 0; x < l.size(); x++) {
-			System.out.println(l.get(x));
-		}
-	}
-	public void printFigli(ArrayList l) {
-		for (int x = 0; x < l.size(); x++) {
-			Person fig  = (Person) l.get(x);
-			System.out.println(fig.getNome());
-		}
-	}
+	}	
 }

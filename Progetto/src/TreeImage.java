@@ -35,16 +35,12 @@ public class TreeImage {
 	 * @param cont 		starts from 0, specifies the image number in the "History" folder
 	 */
 	public static void createImage(int cont) {
-		System.out.println("--------------------------------------------------------------------------------");
-		System.out.println(StringProcessor.getCodifica());
 		
 		//CODIFICA LINES GET SEPARETED TO MAKE THEM EASIER TO HANDLE 
 		ArrayList<String> lines = StringProcessor.separate(codifica.substring(1), "\n");
         
 		//DUPLICATE LINES GET REMOVED
 		lines = StringProcessor.removeDuplicates(lines);
-		for(int i = 0; i < lines.size(); i++)
-			System.out.println(lines.get(i));
 		
         //TREE HEIGHT CALCULATION
         tree_height = calcHeight(lines);

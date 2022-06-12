@@ -257,17 +257,6 @@ public class Home extends javax.swing.JFrame {
 	    	        	TreeImage.setCodifica(StringProcessor.getCodifica());
 	    	        	TreeImage.createImage(0);
 	    	        	
-	    	        	System.out.println("Nome: " + imp.getNome());
-						System.out.println("Dinastia: " + imp.getDinastia());
-						System.out.println("Madre: " + imp.getMadre());
-						System.out.println("Padre: " + imp.getPadre());
-						System.out.println("Coniugi: ");
-						imp.printConiuge(imp.getConiuge());
-						System.out.println("Figli: ");
-						System.out.println(imp.getFigli());
-						System.out.println("\n");
-						System.out.println("Mandato: " + imp.getMandato());
-						System.out.println("\n");
 	               	}
 	                else {
 	                	per.setDinastia();
@@ -277,7 +266,6 @@ public class Home extends javax.swing.JFrame {
 	                   	per.setFigli();
 	                   	//TreeImage.processString(per, "");
 	    	        	StringProcessor.processString(per, "");
-	    	        	System.out.println(StringProcessor.getCodifica());
 	    	        	TreeImage.setCodifica(StringProcessor.getCodifica());
 	    	        	TreeImage.createImage(0);
 	                	}
@@ -347,8 +335,6 @@ public class Home extends javax.swing.JFrame {
 				imp.setMandato();
 				imp.setFigli();
 				imp.closeDriver(imp.getDriver());
-				System.out.println(imp.getNome());
-				System.out.println("mandato:" + imp.getMandato());
 				
 				StringProcessor.processString(imp, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());

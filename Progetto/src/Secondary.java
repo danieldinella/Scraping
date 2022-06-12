@@ -264,8 +264,6 @@ public class Secondary extends javax.swing.JFrame {
 					imp.setMandato();
 					imp.setFigli();
 					imp.closeDriver(imp.getDriver());
-					System.out.println(imp.getNome());
-					System.out.println("mandato:" + imp.getMandato());
 					
 					StringProcessor.processString(imp, "");
 		        	TreeImage.setCodifica(StringProcessor.getCodifica());
@@ -282,7 +280,6 @@ public class Secondary extends javax.swing.JFrame {
 					StringProcessor.processString(per, "");
 		        	TreeImage.setCodifica(StringProcessor.getCodifica());
 		        	TreeImage.createImage(c);
-		        	System.out.println(StringProcessor.getCodifica());
 				}
 	        }
 	        catch (Exception e) {
@@ -324,8 +321,6 @@ public class Secondary extends javax.swing.JFrame {
 				imp.setMandato();
 				imp.setFigli();
 				imp.closeDriver(imp.getDriver());
-				System.out.println(imp.getNome());
-				System.out.println("mandato:" + imp.getMandato());
 				
 				StringProcessor.processString(imp, "");
 	        	TreeImage.setCodifica(StringProcessor.getCodifica());
