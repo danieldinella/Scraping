@@ -11,15 +11,22 @@ public class Imperatore extends Person{
 	private boolean checkImperatore;
 	private String mandato = "";
 
+	// CONSTRUCTOR
 	public Imperatore(String nome, String link, boolean imperatore) {
 		super(nome, link);
 		this.checkImperatore = true;
 	}
 	
+	// GET METHOD
 	public boolean getCheckImperatore() {
 		return this.checkImperatore;
 	}
+	
+	public String getMandato() {
+		return this.mandato;
+	}
 
+	// SET METHOD
 	public void setMandato() {
 		// GET NUMBER OF REIGN'S TABLE LINE
 		int i = -1;
@@ -54,10 +61,6 @@ public class Imperatore extends Person{
 				this.mandato = this.mandato.concat(numeri.get(0) + "-" + numeri.get(numeri.size() - 1));
 			}
 		}	
-	}
-	
-	public String getMandato() {
-		return this.mandato;
 	}
 	
 }
