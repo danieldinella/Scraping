@@ -1,10 +1,9 @@
-import java.io.*;
 
-public class Main {
+public class ScrapingTester4 {
 
 	public static void main(String[] args) {
-		String nome = "Aurelio";
-		String link = "https://it.wikipedia.org/wiki/Marco_Aurelio";
+		String nome = "Settimio Severo";
+		String link = "https://it.wikipedia.org/wiki/Settimio_Severo";
 		Imperatore imp = new Imperatore(nome, link, true);
     	imp.setDinastia();
     	imp.setPadre();
