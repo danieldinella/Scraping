@@ -24,6 +24,7 @@ public class Person {
 	private ArrayList figli = new ArrayList();
 	private ArrayList coniugi = new ArrayList();
 	private List<WebElement> wikiTab;
+	private boolean checkImperatore;
 
 	/**
 	 * Create an object Person with a given name and link to his website.
@@ -111,6 +112,13 @@ public class Person {
 	}
 	
 	/**
+	 * Checks if the person is an emperor
+	 */
+	public boolean getCheckImp() {
+		return this.checkImperatore;
+	}
+
+	/**
 	 * Sets the dinasty of this person
 	 */
 	public void setDinastia() {
@@ -154,15 +162,15 @@ public class Person {
 					String nome = r.getText();
 					String link = r.getAttribute("href");
 					Person per = new Person(nome, link);
-					
+					per.setCheckImp();
 					if(per.getCheckImp()) {
 						per.closeDriver(per.getDriver());
-						Imperatore imp = new Imperatore(nome, link, true);
+						Imperatore imp = new Imperatore(nome, link);
 						imp.setDinastia();
 						imp.setPadre();
 						imp.setMadre();
 						imp.setConiuge();
-						imp.setCheckImperatore();
+						imp.setCheckImp();
 						imp.setMandato();
 						
 						if (imp.getDinastia() != "") {
@@ -279,21 +287,19 @@ public class Person {
 			}
 		}
 	}
-
+	
 	/**
-	 * Checks if the person is an emperor
+	 * Check if the person is an emperor
 	 */
-	public boolean getCheckImp() {
-        // CHECK IF THE PERSON IS AN EMPEROR
+	public void setCheckImp() {
         for (WebElement t : this.wikiTab) {
             if (t.getText().equals("Regno") | t.getText().equals("In carica")) {
                 // IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
-                return true;
+                this.checkImperatore = true;
             }
         }
-        return false;
     }
-	
+
 	/**
 	 * Close the Web Driver
 	 * @param driver	Chrome Web Driver

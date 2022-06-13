@@ -7,41 +7,25 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Imperatore extends Person{
-	
-	private boolean checkImperatore;
+
 	private String mandato = "";
 
-	/**
-	 * Creates an object Imperatore with a given name, link and e
-	 * @param nome
-	 * @param link
-	 * @param imperatore
-	 */
-	public Imperatore(String nome, String link, boolean imperatore) {
+	public Imperatore(String nome, String link) {
 		super(nome, link);
-		this.checkImperatore = true;
 	}
-	
 
-	public boolean getCheckImperatore() {
-		return this.checkImperatore;
-	}
 	
+	/**
+	 * Gets the mandate of the emperor
+	 * @return	mandate
+	 */
 	public String getMandato() {
 		return this.mandato;
 	}
-
-	public void setCheckImperatore() {
-        // CHECK IF THE PERSON IS AN EMPEROR
-        for (WebElement t : super.getWikiTab()) {
-            if (t.getText().equals("Regno") | t.getText().equals("In carica")) {
-                // IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
-                this.checkImperatore = true;
-            }
-        }
-    }
 	
-	// SET METHOD
+	/**
+	 * Sets the mandate of the emperor
+	 */
 	public void setMandato() {
 		// GET NUMBER OF REIGN'S TABLE LINE
 		int i = -1;
