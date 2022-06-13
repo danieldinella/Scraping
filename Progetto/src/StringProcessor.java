@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Iterator;
 
-/* StringProcessor class
+/** StringProcessor class
  * This class is used to process the starting root into an indented String
  * that follows a format to store informations that will be used when creating
  * Node objects. It defines all the static methods used to process the result 
@@ -84,7 +84,7 @@ public class StringProcessor {
 		if(root.getFigli().isEmpty())
 			//... if that's the case only its name and spouses needs to be added to the line
 			//If the root hasn't got any spouses ...
-			if(root.getConiuge().isEmpty()) 
+			if(root.getConiugi().isEmpty()) 
 				//... only its name gets added
 				codifica += (root.getNome());
 			else
@@ -194,35 +194,6 @@ public class StringProcessor {
 		}
 	}
 	
-	/* removeDuplicates method
-	 * To prevent duplicate nodes and sub-trees, this function creates a new 
-	 * ArrayList of lines without duplicate lines still maintaining the current
-	 * order.
-	 * Example ["A", "C", "B", "C", "C", "A", "B"]  ------> ["A", "C", "B"]
-	 * Example ["A ", "C", "B", "C", "C", "A", "B"] ------> ["A ", "C", "B", "A"]
-	 * To prevent the last case from happening the method performs further controls
-	 * 
-	 * @param lines		ArrayList containg lines with duplicates
-	 * @return			new ArrayList without duplicates
-	 */
-	public static ArrayList<String> removeDuplicates(ArrayList<String> lines) {
-		//Creates a new ArrayList
-		ArrayList<String> new_lines = new ArrayList<String>();
-		//For each element contained in the lines ArrayList
-		for(String line: lines)
-			//If the new ArrayList doesn't contain the current element ...
-			if(!new_lines.contains(line))
-				// ... it gets added to the new ArrayList
-				new_lines.add(line);
-		//Last line in the new ArrayList gets controlled (ex: "Giulia Lavilla")
-		String last_line = new_lines.get(new_lines.size()-1);
-		//If the new ArrayList contains the last line + a blank space (ex: "Giulia Lavilla ") ...
-		if(new_lines.contains(last_line+" "))
-			// ... the last line gets removed
-			new_lines.remove(new_lines.size()-1);
-		//The new ArrayList gets returned
-		return new_lines;
-	}
 	
 	/** removeDuplicates method
 	 * To prevent duplicate nodes and sub-trees, this function creates a new 

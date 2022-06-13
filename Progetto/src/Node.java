@@ -1,7 +1,7 @@
 import java.util.ArrayList;  
 import java.util.Collections;
 
-/* Node class
+/** Node class
  * This class contains a node attributes, all of them get initialized in the constructor
  * method and they are useful when it comes to draw the node thanks to its get methods
  * 

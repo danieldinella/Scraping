@@ -12,8 +12,8 @@ import com.google.common.graph.ElementOrder.Type;
 
 import io.opentelemetry.exporter.logging.SystemOutLogExporter;
 
-/*
- * @author Michelangelo Crea & Daniel di Nella
+/**
+ * @author Michelangelo Crea & Daniel Di Nella
  */
 public class Person {	
 

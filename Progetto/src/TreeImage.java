@@ -9,7 +9,7 @@ import java.util.Collections;
 import javax.imageio.ImageIO;
 import net.bytebuddy.asm.Advice.This;
 
-/* TreeImage class
+/** TreeImage class
  * This class is the actor that will draw the final image after creating all the istances
  * of Node
  * 
@@ -295,7 +295,7 @@ public class TreeImage {
 		}
 	}
 	
-	/* setCodifica method
+	/** setCodifica method
 	 * @param s 	The semi-processed String
 	 */
 	public static void setCodifica(String s) {

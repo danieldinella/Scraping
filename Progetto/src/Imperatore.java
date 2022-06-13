@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+/**
+ * @author Michelangelo Crea & Daniel Di Nella
+ */
 public class Imperatore extends Person{
 
 	private String mandato = "";

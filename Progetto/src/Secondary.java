@@ -19,7 +19,7 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author Enrico
+ * @author Enrico Chiarello
  */
 public class Secondary extends javax.swing.JFrame {
 
