@@ -37,7 +37,7 @@ public class StringProcessor {
 	 */
 	private static String codifica;
 	
-	/* separate method
+	/** separate method
 	 * Splits a string in a list of strings using a given parameter as a separator
 	 * 
 	 * @param toSeparate		string to separate
@@ -55,7 +55,7 @@ public class StringProcessor {
 		return listOfString;
 	}
 	
-	/* countMatches method
+	/** countMatches method
 	 * Counts how many times a substring appears in a string
 	 * 
 	 * @param str				string to analyze	
@@ -67,7 +67,7 @@ public class StringProcessor {
         return str.split(target, -1).length - 1;
     }
 	
-	/* processString method (Persona as root)
+	/** processString method (Persona as root)
 	 * Starting from an initial number of tabs of 0 and the Person object called root, 
 	 * the method performs a pre-order visit using recursive calls using his children and
 	 * the number of tabs plus 1.
@@ -89,17 +89,17 @@ public class StringProcessor {
 				codifica += (root.getNome());
 			else
 				//... otherwise its name and spouses get added
-				codifica +=(root.getNome() + " + " + root.getConiuge());
+				codifica +=(root.getNome() + " + " + root.getConiugi());
 		//Otherwise...
 		else {
 			//... if that's the case only its name and spouses needs to be added to the line
 			//If the root hasn't got any spouses ...
-			if(root.getConiuge().isEmpty())
+			if(root.getConiugi().isEmpty())
 				//... only its name and years of reign get added
 				codifica += (root.getNome());
 			else
 				//... otherwise its name, years of reign and spouses get added
-				codifica += (root.getNome() + " + " + root.getConiuge());
+				codifica += (root.getNome() + " + " + root.getConiugi());
 			//Since root has got children they will be put in an ArrayList
 			ArrayList figli = root.getFigli();
 			//If figli ArrayList isn't empty ...
@@ -113,7 +113,7 @@ public class StringProcessor {
 				//... the current element will be put in a temporary Persona type variable
 				Person fi = (Person) figli.get(i);
 				//If the child is an emperor ...
-				if(fi.checkImp()) {
+				if(fi.getCheckImp()) {
 					// ... it will be casted as an Imperatore type object, its mandato attribute will be conserved
 					Imperatore imp = (Imperatore) figli.get(i);
 					//Then the method using an Imperatore as root will be recursevily called
@@ -129,7 +129,7 @@ public class StringProcessor {
 		}
 	}
 	
-	/* processString method (Imperatore as root)
+	/** processString method (Imperatore as root)
 	 * Starting from an initial number of tabs of 0 and the Person object called root, 
 	 * the method performs a pre-order visit using recursive calls using his children and
 	 * the number of tabs plus 1.
@@ -149,22 +149,22 @@ public class StringProcessor {
 		if(root.getFigli().isEmpty())
 			//... if that's the case only its name and spouses needs to be added to the line
 			//If the root hasn't got any spouses ...
-			if(root.getConiuge().isEmpty()) 
+			if(root.getConiugi().isEmpty()) 
 				//... only its name and years of reign get added
 				codifica += (root.getNome() + " (" + root.getMandato() + ")");
 			else
 				//... otherwise its name, years of reign and spouses get added
-				codifica +=(root.getNome() + " (" + root.getMandato() + ")" + " + " + root.getConiuge());
+				codifica +=(root.getNome() + " (" + root.getMandato() + ")" + " + " + root.getConiugi());
 		//Otherwise...
 		else {
 			//... if that's the case only its name and spouses needs to be added to the line
 			//If the root hasn't got any spouses ...
-			if(root.getConiuge().isEmpty())
+			if(root.getConiugi().isEmpty())
 				//... only its name and years of reign get added
 				codifica += (root.getNome() + " (" + root.getMandato() + ")");
 			else
 				//... otherwise its name, years of reign and spouses get added
-				codifica += (root.getNome() + " (" + root.getMandato() + ")" + " + " + root.getConiuge());
+				codifica += (root.getNome() + " (" + root.getMandato() + ")" + " + " + root.getConiugi());
 			//Since root has got children they will be put in an ArrayList
 			ArrayList figli = root.getFigli();
 			//If figli ArrayList isn't empty ...
@@ -178,7 +178,7 @@ public class StringProcessor {
 				//... the current element will be put in a temporary Persona type variable
 				Person fi = (Person) figli.get(i);
 				//If the child is an emperor ...
-				if(fi.checkImp()) {
+				if(fi.getCheckImp()) {
 					// ... it will be casted as an Imperatore type object, its mandato attribute will be conserved
 					Imperatore imp = (Imperatore) figli.get(i);
 					//Then the method using an Imperatore as root will be recursevily called
@@ -224,7 +224,37 @@ public class StringProcessor {
 		return new_lines;
 	}
 	
-	/* getCodifica method
+	/** removeDuplicates method
+	 * To prevent duplicate nodes and sub-trees, this function creates a new 
+	 * ArrayList of lines without duplicate lines still maintaining the current
+	 * order.
+	 * Example ["A", "C", "B", "C", "C", "A", "B"]  ------> ["A", "C", "B"]
+	 * Example ["A ", "C", "B", "C", "C", "A", "B"] ------> ["A ", "C", "B", "A"]
+	 * To prevent the last case from happening the method performs further controls
+	 * 
+	 * @param lines		ArrayList containg lines with duplicates
+	 * @return			new ArrayList without duplicates
+	 */
+	public static ArrayList<String> removeDuplicates(ArrayList<String> lines) {
+		//Creates a new ArrayList
+		ArrayList<String> new_lines = new ArrayList<String>();
+		//For each element contained in the lines ArrayList
+		for(String line: lines)
+			//If the new ArrayList doesn't contain the current element ...
+			if(!new_lines.contains(line))
+				// ... it gets added to the new ArrayList
+				new_lines.add(line);
+		//Last line in the new ArrayList gets controlled (ex: "Giulia Lavilla")
+		String last_line = new_lines.get(new_lines.size()-1);
+		//If the new ArrayList contains the last line + a blank space (ex: "Giulia Lavilla ") ...
+		if(new_lines.contains(last_line+" "))
+			// ... the last line gets removed
+			new_lines.remove(new_lines.size()-1);
+		//The new ArrayList gets returned
+		return new_lines;
+	}
+	
+	/** getCodifica method
 	 * When it comes to get the codifica attribute the first line contains
 	 * "null\n ", this line must be removed otherwise a null Node will be
 	 * created
@@ -236,7 +266,8 @@ public class StringProcessor {
 		return codifica.substring(1);
 	}
 	
-	/* resetCodifica method
+
+	/** resetCodifica method
 	 * Every time a new Tree gets created, codifica attribute needs to be
 	 * re-setted to prevent overlapping dynasty trees
 	 */

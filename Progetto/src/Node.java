@@ -23,6 +23,11 @@ public class Node {
 	 * int RECT_H and RECT_B
 	 *  Node rectangle sizes, they will be constant to prevent arrows overlapping other
 	 *  nearby rectangles
+	 *  Specifies the number of outgoing arrows from a node, doesn't work in duplicate
+	 *  nodes
+	 * boolean imp attribute
+	 *  1 = Was an Emperor, 0 = Wasn't an Emperor 
+	 *  
 	 */
 	private int tile_y;	
 	private int tile_x;

@@ -12,8 +12,11 @@ import com.google.common.graph.ElementOrder.Type;
 
 import io.opentelemetry.exporter.logging.SystemOutLogExporter;
 
-public class Person {
-	
+/*
+ * @author Michelangelo Crea & Daniel di Nella
+ */
+public class Person {	
+
 	private ChromeOptions options = new ChromeOptions();
 	private WebDriver driver;
 	private String nome;
@@ -22,11 +25,16 @@ public class Person {
 	private String padre = "";
 	private String madre = "";
 	private ArrayList figli = new ArrayList();
-	private ArrayList coniuge = new ArrayList();
-	private List<WebElement> tab;
+	private ArrayList coniugi = new ArrayList();
+	private List<WebElement> wikiTab;
 	private boolean checkImperatore;
 
-	// CONSTRUCTOR
+	/**
+	 * Create an object Person with a given name and link to his website.
+	 *  
+	 * @param nome		Person's name
+	 * @param link		Web site link
+	 */
 	public Person(String nome, String link) {
 		//URL SETTINGS
 		System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
@@ -38,54 +46,84 @@ public class Person {
 		this.nome = nome;
 		this.link = link;
 		this.driver.get(link);
-		this.tab = driver.findElements(By.xpath("//div[@id = 'mw-content-text']"
+		this.wikiTab = driver.findElements(By.xpath("//div[@id = 'mw-content-text']"
 				+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
 	}
-	
-	public Person(String nome, String link, boolean imperatore) {
-		//URL SETTINGS
-			System.setProperty("webdriver.chrome.driver", "C:\\browserdrivers\\chromedriver.exe");
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--headless");
-			this.driver = new ChromeDriver(options);
-				
-		//ATTRIBUTES SETTINGS
-			this.nome = nome;
-			this.link = link;
-			this.driver.get(link);
-			this.tab = driver.findElements(By.xpath("//div[@id = 'mw-content-text']"
-						+ "/div[@class = 'mw-parser-output']/table[@class = 'sinottico']/tbody/tr/th"));
-	}
-	
-	// GET METHODS
-	
+
+	/**
+	 * Gets the sons of this person
+	 * @return	sons
+	 */
 	public ArrayList getFigli() {
 		return this.figli;
 	}
 	
+	/**
+	 * Gets the dinasty of this person
+	 * @return	dinasty
+	 */
 	public String getDinastia() {
 		return this.dinastia;
 	}
 	
+	/**
+	 * Gets the name of this person
+	 * @return	name
+	 */
 	public String getNome() {
 		return this.nome;
 	}
 	
+	/**
+	 * Gets the father of this person
+	 * @return	father
+	 */
 	public String getPadre() {
 		return this.padre;
 	}
 	
+	/**
+	 * Gets the mother of this person
+	 * @return	mother
+	 */
 	public String getMadre() {
 		return this.madre;
 	}
 	
-	public ArrayList getConiuge() {
-		return this.coniuge;
+	/**
+	 * Gets the consorts of this person
+	 * @return	consorts
+	 */
+	public ArrayList getConiugi() {
+		return this.coniugi;
 	}
 
+	/**
+	 * Gets the wikitable of the website
+	 * @return	wikitable
+	 */
+	public List<WebElement> getWikiTab(){
+		return this.wikiTab;
+	}
 	
-	//SET METHODS
+	/**
+	 * Gets the website of this person
+	 * @return	website
+	 */
+	public WebDriver getDriver() {
+		return this.driver;
+	}
 	
+	/**
+	 * Checks if the person is an emperor
+	 */
+	public boolean getCheckImp() {
+		return this.checkImperatore;
+	}
+
+	/**
+	 * Sets the dinasty of this person
+	 */
 	public void setDinastia() {
 		
 		// GET DINASTY'S NAME
@@ -97,12 +135,15 @@ public class Person {
 		}
 	}
 	
+	/**
+	 * Sets the sons of this person
+	 */
 	public void setFigli() {
 		
-		// GET NUMBER OF SONS' TABLE LINE
+		// GET THE NUMBER OF SONS' TABLE LINE
 		int i = -1;
 		int j = 1;
-		for (WebElement t : this.tab) {
+		for (WebElement t : this.wikiTab) {
 			if (t.getText().equals("Figli")) {
 				i = j + 1;
 			}
@@ -124,16 +165,15 @@ public class Person {
 					String nome = r.getText();
 					String link = r.getAttribute("href");
 					Person per = new Person(nome, link);
-					per.setCheckImperatore();
-					if(per.checkImp()) {
+					per.setCheckImp();
+					if(per.getCheckImp()) {
 						per.closeDriver(per.getDriver());
-						Imperatore imp = new Imperatore(nome, link, true);
+						Imperatore imp = new Imperatore(nome, link);
 						imp.setDinastia();
 						imp.setPadre();
-						System.out.println("NOME IMPERATORE: " + imp.getNome());
 						imp.setMadre();
 						imp.setConiuge();
-						imp.setCheckImperatore();
+						imp.setCheckImp();
 						imp.setMandato();
 						
 						if (imp.getDinastia() != "") {
@@ -145,19 +185,7 @@ public class Person {
 						
 						imp.closeDriver(imp.getDriver());
 						
-						// STAMPE PER DEBUG
 						
-						System.out.println("Nome: " + imp.getNome());
-						System.out.println("Dinastia: " + imp.getDinastia());
-						System.out.println("Madre: " + imp.getMadre());
-						System.out.println("Padre: " + imp.getPadre());
-						System.out.println("Coniugi: ");
-						imp.printConiuge(imp.getConiuge());
-						System.out.println("Figli: ");
-						imp.printFigli(imp.getFigli());
-						System.out.println("\n");
-						System.out.println("Mandato: " + imp.getMandato());
-						System.out.println("\n");
 					}
 					else {
 						per.setDinastia();
@@ -174,19 +202,6 @@ public class Person {
 						
 						per.closeDriver(per.getDriver());
 						
-						// STAMPE PER DEBUG
-						
-
-						System.out.println("Nome: " + per.getNome());
-						System.out.println("Dinastia: " + per.getDinastia());
-						System.out.println("Madre: " + per.getMadre());
-						System.out.println("Padre: " + per.getPadre());
-						System.out.println("Coniugi: ");
-						printConiuge(per.getConiuge());
-						System.out.println("Figli: ");
-						printFigli(per.getFigli());
-						System.out.println("\n");
-						
 					}
 				}
 			}
@@ -196,26 +211,16 @@ public class Person {
 		
 		
 	}
-	
-	public void closeDriver(WebDriver driver) {
-		// CLOSE THE WEB SITE
-		driver.quit();
-	}
-	
-	public List<WebElement> getTab(){
-		return this.tab;
-	}
-	
-	public WebDriver getDriver() {
-		return this.driver;
-	}
-	
+
+	/**
+	 * Sets the father of this person
+	 */
 	public void setPadre() {
 
 		// GET NUMBER OF DAD'S TABLE LINE
 		int i = -1;
 		int j = 1;
-		for (WebElement t : this.tab) {
+		for (WebElement t : this.wikiTab) {
 			if (t.getText().equals("Padre")) {
 				i = j + 1;
 			}
@@ -231,12 +236,15 @@ public class Person {
 		}
 	}
 
+	/**
+	 * Sets the mother of this person
+	 */
 	public void setMadre() {
 		
 		// GET NUMBER OF MOM'S TABLE LINE
 		int i = -1;
 		int j = 1;
-		for (WebElement t : this.tab) {
+		for (WebElement t : this.wikiTab) {
 			if (t.getText().equals("Madre")) {
 				i = j + 1;
 			}
@@ -252,13 +260,16 @@ public class Person {
 		}
 	}
 
+	/**
+	 * Sets the consorts of this person
+	 */
 	public void setConiuge() {
 		
 		// GET NUMBER OF CONSORTS' TABLE LINE
 		int i = -1;
 		int j = 1;
-		for (WebElement t : this.tab) {
-			if (t.getText().equals("Coniuge") | t.getText().equals("Coniugi")) {
+		for (WebElement t : this.wikiTab) {
+			if (t.getText().equals("Coniuge") | t.getText().equals("Coniugi") | t.getText().equals("Consorte") | t.getText().equals("Consorti")) {
 				i = j + 1;
 			}
 			else {
@@ -274,36 +285,29 @@ public class Person {
 				// CHECK TO WIKIPEDIA IMPERFECTIONS
 				String con = r.getText();
 				if (!Character.isDigit(con.charAt(0))){
-					this.coniuge.add(r.getText());
+					this.coniugi.add(r.getText());
 				}
 			}
 		}
 	}
 	
-	public void setCheckImperatore() {
-		// CHECK IF THE PERSON IS AN EMPEROR
-		for (WebElement t : this.tab) {
-			if (t.getText().equals("Regno") | t.getText().equals("In carica")) {
-				// IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
-				this.checkImperatore = true;
-			}
-		}
-	}
-	
-	public boolean checkImp() {
-		return this.checkImperatore;
-	}
-	
-	// STAMPE PER DEBUG
-	public void printConiuge(ArrayList l) {
-		for (int x = 0; x < l.size(); x++) {
-			System.out.println(l.get(x));
-		}
-	}
-	public void printFigli(ArrayList l) {
-		for (int x = 0; x < l.size(); x++) {
-			Person fig  = (Person) l.get(x);
-			System.out.println(fig.getNome());
-		}
+	/**
+	 * Check if the person is an emperor
+	 */
+	public void setCheckImp() {
+        for (WebElement t : this.wikiTab) {
+            if (t.getText().equals("Regno") | t.getText().equals("In carica")) {
+                // IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
+                this.checkImperatore = true;
+            }
+        }
+    }
+
+	/**
+	 * Close the Web Driver
+	 * @param driver	Chrome Web Driver
+	 */
+	public void closeDriver(WebDriver driver) {
+		driver.quit();
 	}
 }

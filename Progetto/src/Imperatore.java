@@ -7,24 +7,30 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Imperatore extends Person{
-	
-	private boolean checkImperatore;
+
 	private String mandato = "";
 
-	public Imperatore(String nome, String link, boolean imperatore) {
+	public Imperatore(String nome, String link) {
 		super(nome, link);
-		this.checkImperatore = true;
-	}
-	
-	public boolean getCheckImperatore() {
-		return this.checkImperatore;
 	}
 
+	
+	/**
+	 * Gets the mandate of the emperor
+	 * @return	mandate
+	 */
+	public String getMandato() {
+		return this.mandato;
+	}
+	
+	/**
+	 * Sets the mandate of the emperor
+	 */
 	public void setMandato() {
 		// GET NUMBER OF REIGN'S TABLE LINE
 		int i = -1;
 		int j = 1;
-		for (WebElement t : super.getTab()) {
+		for (WebElement t : super.getWikiTab()) {
 			if (t.getText().equals("Regno")) {
 				i = j + 1;
 			}
@@ -45,7 +51,6 @@ public class Imperatore extends Person{
 			
 			for (WebElement x : anno) {
 				String appo = x.getText();
-				System.out.println(appo);
 				char c = appo.charAt(0);
 				if(Character.isDigit(c)) {
 					numeri.add(x.getText());
@@ -55,10 +60,6 @@ public class Imperatore extends Person{
 				this.mandato = this.mandato.concat(numeri.get(0) + "-" + numeri.get(numeri.size() - 1));
 			}
 		}	
-	}
-	
-	public String getMandato() {
-		return this.mandato;
 	}
 	
 }

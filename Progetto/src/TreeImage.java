@@ -44,7 +44,7 @@ public class TreeImage {
 	private static ArrayList<ArrayList<Integer>> tree_tiles_map;
 	private static ArrayList<Node> nodes_list = new ArrayList<Node>();
 	
-	/* createImage method
+	/** createImage method
 	 * Calculates all the attribute values and then it creates and saves the image
 	 * in a folder called "History"
 	 * 
@@ -67,8 +67,7 @@ public class TreeImage {
         img_width = tree_width * 220;
         img_height = (tree_height+1) * 150;
         //Nodes creation
-        createNodes(lines);
-        
+        createNodes(lines);     
         //The img gets itialized with the newly calculated sizes
         img = new BufferedImage(img_width, img_height, BufferedImage.TYPE_INT_RGB);
         //Now g2d is able to modify img graphics
@@ -88,7 +87,7 @@ public class TreeImage {
         }
 	}
 	
-	/* calcHeight method
+	/** calcHeight method
 	 * Calculates tree height by finding the line with the highest amount
 	 * of tabs (\t), the number of max tabs will be the tree height
 	 * 
@@ -114,7 +113,7 @@ public class TreeImage {
         return max_height;
     }
 	
-	/* calcWidthPerHeight method
+	/** calcWidthPerHeight method
 	 * Calculates the width (number of members) for each height level of the tree
 	 * by calculating the number of tabs (/t) for each line and then adding 1 to the
 	 * found height depth
@@ -143,7 +142,7 @@ public class TreeImage {
 		return width_per_height;
 	}
 	
-	/* calcNodesTiles method
+	/** calcNodesTiles method
 	 * Creates a list with all the x and y tiles coordinate for each line in the
 	 * corresponding index
 	 * 
@@ -187,7 +186,7 @@ public class TreeImage {
 		return y_x_list;
 	}
 	
-	/* createNodes method
+	/** createNodes method
 	 * Creates the list of nodes to draw using the attributes calculated before,
 	 * each iteration creates a new Node object
 	 * 
@@ -205,9 +204,7 @@ public class TreeImage {
         }
 	}
 	
-	/* drawNodes method
-	 * After the nodes list gets filled all the nodes and outgoing arrows are ready to be
-	 * drawn.
+	/** drawNodes method
 	 * For each iteration, g2d performs these actions:
 	 * 1. draws the rectangle filling it using white color
 	 * 2. draws the rectangle's borders using black color
@@ -245,13 +242,8 @@ public class TreeImage {
 			g2d.drawRect(x_start+1, y_start+1, base, height);
 			//3
 			int n_frecce = 0;
-			//This condition becomes false when the cycle encounters a node in the same y tile or when elements are over ...
-			// ... and this is useful to avoid drawing errors after duplicate lines get removed
 			boolean cond = true;
-			//The cycle ends when all the arrows have been drawn, the condition is true and elements are over ...
-			// ... the cycle starts from the next position of the current drawn node
 			for(int j=i+1;  n_frecce < nodes_list.get(i).getN_children() && cond && j < nodes_list.size(); j++) {
-				//If the current node is 1 y tile deeper than the starting node...
 				if(nodes_list.get(i).getTileY() == (nodes_list.get(j).getTileY()-1)) {
 					n_frecce++;
 					//... 2 lines get drawn from the starting node top to the current node bottom to form a thicker arrow
