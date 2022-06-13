@@ -7,31 +7,34 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Imperatore extends Person{
-	
-	private boolean checkImperatore;
+
 	private String mandato = "";
 
-	// CONSTRUCTOR
-	public Imperatore(String nome, String link, boolean imperatore) {
+	/**
+	 * Creates an object Imperatore with a given name and link
+	 * @param nome		name of the emperor
+	 * @param link		link of the website of the emperor
+	 */
+	public Imperatore(String nome, String link) {
 		super(nome, link);
-		this.checkImperatore = true;
 	}
 	
-	// GET METHOD
-	public boolean getCheckImperatore() {
-		return this.checkImperatore;
-	}
-	
+	/**
+	 * Gets the mandate of the emperor
+	 * @return	mandate
+	 */
 	public String getMandato() {
 		return this.mandato;
 	}
 
-	// SET METHOD
+	/**
+	 * Sets the mandate of the emperor
+	 */
 	public void setMandato() {
 		// GET NUMBER OF REIGN'S TABLE LINE
 		int i = -1;
 		int j = 1;
-		for (WebElement t : super.getTab()) {
+		for (WebElement t : super.getWikiTab()) {
 			if (t.getText().equals("Regno")) {
 				i = j + 1;
 			}

@@ -28,7 +28,7 @@ public class TreeImage {
 	private static ArrayList<ArrayList<Integer>> tree_tiles_map;
 	private static ArrayList<Node> nodes_list = new ArrayList<Node>();
 	
-	/* createImage method
+	/** createImage method
 	 * Calculates all the attribute values and then it creates and saves the image
 	 * in a folder called "History"
 	 * 
@@ -76,7 +76,7 @@ public class TreeImage {
         }
 	}
 	
-	/* calcHeight method
+	/** calcHeight method
 	 * Calculates tree height by finding the line with the highest amount
 	 * of tabs (\t), the number of max tabs will be the tree height
 	 * 
@@ -95,7 +95,7 @@ public class TreeImage {
         return max_height;
     }
 	
-	/* calcWidthPerHeight method
+	/** calcWidthPerHeight method
 	 * Calculates the width (number of members) for each height level of the tree
 	 * by calculating the number of tabs (/t) for each line and then adding 1 to the
 	 * found height depth
@@ -117,7 +117,7 @@ public class TreeImage {
 		return width_per_height;
 	}
 	
-	/* calcNodesTiles method
+	/** calcNodesTiles method
 	 * Creates a list with all the x and y tiles coordinate for each line in the
 	 * corresponding index
 	 * 
@@ -153,7 +153,7 @@ public class TreeImage {
 		return y_x_list;
 	}
 	
-	/* createNodes method
+	/** createNodes method
 	 * Creates the list of nodes to draw using the attributes calculated before,
 	 * each iteration creates a new Node object
 	 * 
@@ -168,7 +168,7 @@ public class TreeImage {
         }
 	}
 	
-	/* drawNodes method
+	/** drawNodes method
 	 * For each iteration, g2d performs these actions:
 	 * 1. draws the rectangle filling it using white color
 	 * 2. draws the rectangle's borders using black color
