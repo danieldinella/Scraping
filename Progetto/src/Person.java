@@ -287,8 +287,10 @@ public class Person {
 	}
 	
 	
+	/**
+	 * Check if the person is an emperor
+	 */
 	public void setCheckImp() {
-        // CHECK IF THE PERSON IS AN EMPEROR
         for (WebElement t : this.wikiTab) {
             if (t.getText().equals("Regno") | t.getText().equals("In carica")) {
                 // IF THE PERSON IS AN EMPEROR CHANGE HIS STATUS
