@@ -8,7 +8,14 @@ import javax.swing.JTextField;
 
 /**
 *
-* @author Enrico
+* If you run the Home class, a frame will appear on the screen.
+* Home, therefore, is the window from which the user will have to start before 
+* viewing any image and then before moving to the Secondary class. 
+* It is an introduction class where you can understand the purpose and 
+* functionality of the project.
+* 
+* @author Enrico Chiarello
+* @version 1.6.6
 */
 public class Home extends javax.swing.JFrame {
 	

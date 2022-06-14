@@ -18,8 +18,14 @@ import javax.swing.JFileChooser;
 import java.awt.image.BufferedImage;
 
 /**
+ * From the Home class, by performing the first search, you will automatically 
+ * switch to the Secondary class, which has the function of showing on screen 
+ * the image of the family tree of the emperor just searched and to continue with 
+ * the search by updating the image in the center of the window. 
+ * Also you can make image saves and view the history.
  *
  * @author Enrico Chiarello
+ * @version 1.6.6
  */
 public class Secondary extends javax.swing.JFrame {
 
