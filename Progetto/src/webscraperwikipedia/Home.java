@@ -20,8 +20,49 @@ import javax.swing.JTextField;
 */
 public class Home extends javax.swing.JFrame {
 	
+	// Variables declaration - do not modify    
 	/**
-     * Creates new form Home
+     * the central writing
+     */
+    private javax.swing.JLabel lbTitle;
+    /**
+     * key to search by writing the name
+     */
+    private javax.swing.JButton btnSearchName;
+    /**
+     * key to search by menu
+     */
+    private javax.swing.JButton btnSearchComb;
+    /**
+     * dynasties menu
+     */
+    private javax.swing.JComboBox<String> jCombBox;
+    /**
+     * the menu at the top of the window
+     */
+    private javax.swing.JMenuBar menu;
+    /**
+     * the text area that acquires the name of the emperor
+     */
+    private javax.swing.JTextField txtName;
+    /**
+     * "info" menu item
+     */
+    private javax.swing.JMenu voice1;
+    /**
+     * first panel for graphics
+     */
+    private javax.swing.JPanel jPanel1;
+    /**
+     * second panel for graphics
+     */
+    private javax.swing.JPanel jPanel2;
+    // End of variables declaration   
+	
+	/**
+     * Constructor that calls the initComponents() function 
+     * and defines the color and position of the window on the screen
+     * 
      */
     public Home() {
         initComponents();
@@ -30,21 +71,23 @@ public class Home extends javax.swing.JFrame {
     } 
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+     * This method is called from within the constructor to initialize the form. 
+     * In particular it deals with the positioning, size, background, color and 
+     * leyout in general of each graphic attribute. It also declares the 
+     * listeners who have the task of triggering events and then recall methods
+     * 
+     */                       
     private void initComponents() {
 
-    	lbTitle = new javax.swing.JLabel(); // the central writing
-        txtName = new javax.swing.JTextField(); // the text area that acquires the name of the emperor
-        btnSearch = new javax.swing.JButton(); // key to search by writing the name
-        jCombBox = new javax.swing.JComboBox<>(); // dynasties menu
-        btnSearch2 = new javax.swing.JButton(); // key to search by menu
-        menu = new javax.swing.JMenuBar(); // the menu at the top of the window
-        voice1 = new javax.swing.JMenu(); // "info" menu item
-        jPanel1 = new javax.swing.JPanel(); // first panel for graphics
-        jPanel2 = new javax.swing.JPanel(); // second panel for graphics
+    	lbTitle = new javax.swing.JLabel(); 
+        txtName = new javax.swing.JTextField(); 
+        btnSearchName = new javax.swing.JButton(); 
+        jCombBox = new javax.swing.JComboBox<>(); 
+        btnSearchComb = new javax.swing.JButton(); 
+        menu = new javax.swing.JMenuBar(); 
+        voice1 = new javax.swing.JMenu(); 
+        jPanel1 = new javax.swing.JPanel(); 
+        jPanel2 = new javax.swing.JPanel(); 
 
         // adds a listener to the window that allows you to stop the program when you close the window
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,10 +117,10 @@ public class Home extends javax.swing.JFrame {
         });        
 
         // settings for the key to search by writing the name
-        btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchName.setText("Search");
+        btnSearchName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
+                btnSearchNameActionPerformed(evt);
             }
         });
         
@@ -92,7 +135,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(108, 108, 108)
-                .addComponent(btnSearch)
+                .addComponent(btnSearchName)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,7 +144,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSearch)
+                .addComponent(btnSearchName)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         
@@ -124,7 +167,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(106, 106, 106)
-                .addComponent(btnSearch2)
+                .addComponent(btnSearchComb)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -133,15 +176,15 @@ public class Home extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jCombBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSearch2)
+                .addComponent(btnSearchComb)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         
         // settings for the key to search by writing the drop-down menu
-        btnSearch2.setText("Search");
-        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchComb.setText("Search");
+        btnSearchComb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch2ActionPerformed(evt);
+                btnSearchCombActionPerformed(evt);
             }
         });
         
@@ -191,28 +234,40 @@ public class Home extends javax.swing.JFrame {
         
         pack();
                
-    }// </editor-fold>                                                       
+    }                                                      
 
-    private void txtNameMouseClicked(java.awt.event.MouseEvent evt) {                                     
-
+    /**
+     * When the user clicks on the text area of the search by name, 
+     * the gray "Write a name..." is removed and the color is set to black.
+     * 
+     * @param evt   listener of the mouse click
+     */
+    private void txtNameMouseClicked(java.awt.event.MouseEvent evt) {              
         txtName.setText(""); 
         txtName.setForeground(new Color(0,0,0));
-        /* When the user clicks on the text area, 
-            the writing is removed and the color is set to black
-        */
     }                                    
 
+    /**
+     * When the user clicks on the "info" icon, 
+     * a window opens with a short description.
+     * 
+     * @param evt  listener of the mouse click
+     */
     private void voice1MouseClicked(java.awt.event.MouseEvent evt) {                                    
-
         JOptionPane.showMessageDialog(this, "Here you can search for the family \n"
-                    + "tree of any Roman emperor. \n This is a web scaper!", "Info", 1);
-        /* When you click on the "info" icon a window 
-            will open with a short description. 
-            1 as a parameter because it is a message panel.
-        */
+                    + "tree of any Roman emperor. \n This is a web scaper!", "Info", 1); //1 as a parameter because it is a message panel.
+        
     }                                   
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {     // it is called up when you press the search by name button                                     
+    /**
+     * In this method you can make the first search (by writing the name) that follows 
+     * the creation of an image. To display the history correctly, this method deletes 
+     * the history of previous searches. If the input is correct, from here you go to 
+     * the second frame.
+     * 
+     * @param evt    listener of the button click
+     */
+    private void btnSearchNameActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
         String s = txtName.getText(); // takes what is written in txtName
         
@@ -298,21 +353,15 @@ public class Home extends javax.swing.JFrame {
         }
     }                                         
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {    //  is called when you try to close the frame                           
-
-        int Answer = JOptionPane.showConfirmDialog(null, "Are you sure want to exit?", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (Answer == JOptionPane.NO_OPTION) {
-                setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // if the user clicks on "No" nothing happens
-            }
-            if (Answer == JOptionPane.YES_OPTION) {
-                System.exit(0);  // if the user clicks on "Yes" the system is shut down
-            }
-        /*
-            When you click on the "x" it generates a confirmation message
-            */
-    }  
-    
-    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {   // it is called up when you press the search by dinasty button                                        
+    /**
+     * In this method you can make the first search (selecting the dynasty 
+     * from the drop-down menu) that follows the creation of an image. 
+     * To display the history correctly, this method deletes the history of previous searches. 
+     * If the input is correct, from here you go to the second frame.    
+     * 
+     * @param evt  listener of the button click
+     */
+    private void btnSearchCombActionPerformed(java.awt.event.ActionEvent evt) {                                          
    
     	String input = (String) jCombBox.getSelectedItem(); // takes what is selected on the drop-down menu
     	input = input.substring(0, input.indexOf(' '));  // processes the obtained string
@@ -388,16 +437,26 @@ public class Home extends javax.swing.JFrame {
             dispose(); // closes this frame
         }
     } 
-
+    
     /**
-     * @param args the command line arguments
+     * It is called when you try to close the frame. 
+     * In fact, when you click on the "x" a confirmation message is generated.
+     * 
+     * @param evt  listener of window click
      */
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {                               
+
+        int Answer = JOptionPane.showConfirmDialog(null, "Are you sure want to exit?", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (Answer == JOptionPane.NO_OPTION) {
+                setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // if the user clicks on "No" nothing happens
+            }
+            if (Answer == JOptionPane.YES_OPTION) {
+                System.exit(0);  // if the user clicks on "Yes" the system is shut down
+            }
+    } 
+
+    // to start on the screen 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -414,26 +473,12 @@ public class Home extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
+        // Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
             }
         });
-    }
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearch2;
-    private javax.swing.JComboBox<String> jCombBox;
-    private javax.swing.JLabel lbTitle;
-    private javax.swing.JMenuBar menu;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JMenu voice1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    
-    // End of variables declaration                   
+    }                
 }

@@ -1,5 +1,5 @@
 package webscraperwikipedia;
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
@@ -9,9 +9,7 @@ import javax.imageio.ImageReader;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import com.google.common.io.Files;
-
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -29,9 +27,85 @@ import java.awt.image.BufferedImage;
  * @version 1.6.6
  */
 public class Secondary extends javax.swing.JFrame {
+	
+	// Variables declaration - do not modify 
+	/**
+	 * dynasties menu 
+	 */
+	private javax.swing.JComboBox<String> jComboBox1;
+	/**
+	 * key to search by menu
+	 */
+    private javax.swing.JButton btnSearchComb;
+    /**
+     *  the text area that acquires the name of the emperor
+     */
+    private javax.swing.JTextField txtName;
+    /**
+     * key to search by writing the name
+     */
+    private javax.swing.JButton btnSerchName;
+    /**
+     * the central writing
+     */
+    private javax.swing.JLabel lbTitle1; 
+    /**
+     * written at the bottom right
+     */
+    private javax.swing.JLabel lbTitle2;
+    /**
+     * written at the bottom left
+     */
+    private javax.swing.JLabel lbTitle3;
+    /**
+     * the menu bar at the top of the window
+     */
+    private javax.swing.JMenuBar jMenuBar;
+    /**
+     * menu containing two items
+     */
+    private javax.swing.JMenu jMenu;
+    /**
+     * "open" item of menu
+     */
+    private javax.swing.JMenuItem open;
+    /**
+     * "save" item of menu
+     */
+    private javax.swing.JMenuItem save;
+    /**
+     * processed image shown on screen
+     */
+    private javax.swing.JLabel lbImage;
+    /**
+     * chooses the path for saving
+     */
+    private javax.swing.JFileChooser jFileChooser;
+    /**
+     * scroll panel that contains the image
+     */
+    private javax.swing.JScrollPane jScrollPane;
+    /**
+     * legend image
+     */
+    private javax.swing.JLabel lbLegend;
+    /**
+     * counter for history and downloads
+     */
+    private int c = 1;
+    /**
+     * initial image in the history
+     */
+    private ImageIcon i = new ImageIcon("history\\tree0.png"); 
+    /**
+     * path of the initial image in the history
+     */
+	private String currentPath = "history\\tree0.png";  
+    // End of variables declaration   
 
     /**
-     * Creates new form Secondary
+     * Constructor that calls the initComponents() function and 
+     * defines the color and position of the window on the screen.
      */
     public Secondary() {
         initComponents();
@@ -40,32 +114,29 @@ public class Secondary extends javax.swing.JFrame {
         setLocationRelativeTo(null);  // centering frame
     }
     
-    public int c = 1;
-    public ImageIcon i = new ImageIcon("history\\tree0.png"); // initial image in the history
-	public String currentPath = "history\\tree0.png";  // path of the initial image in the history
-
 	/**
-     * This method is called from within the constructor to initialize the form.
-     */
-    
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                         
+     * This method is called from within the constructor to initialize the form. 
+     * In particular it deals with the positioning, size, background, color and leyout
+     *  in general of each graphic attribute. It also declares the listeners who have 
+     *  the task of triggering events and then recall methods.
+     */                        
     private void initComponents() {
 
-    	jFileChooser = new javax.swing.JFileChooser(); // chooses the path for saving
-        lbImage = new javax.swing.JLabel(); // processed image shown on screen
-        lbTitle1 = new javax.swing.JLabel(); // the central writing
-        lbTitle2 = new javax.swing.JLabel(); // written at the bottom right
-        lbTitle3 = new javax.swing.JLabel(); // written at the bottom left
-        btnSerch = new javax.swing.JButton(); // key to search by writing the name
-        txtName = new javax.swing.JTextField(); // the text area that acquires the name of the emperor
-        jComboBox1 = new javax.swing.JComboBox<>(); // dynasties menu 
-        btnSearch2 = new javax.swing.JButton(); // key to search by menu
-        jMenuBar = new javax.swing.JMenuBar(); // the menu at the top of the window
-        jMenu = new javax.swing.JMenu(); // bar containing two items
-        open = new javax.swing.JMenuItem(); // "open" item of menu
-        save = new javax.swing.JMenuItem(); // "save" item of menu
-        jScrollPane = new javax.swing.JScrollPane(); // scroll panel that contains the image
-        lbLegend = new javax.swing.JLabel(); // legend image
+    	jFileChooser = new javax.swing.JFileChooser(); 
+        lbImage = new javax.swing.JLabel(); 
+        lbTitle1 = new javax.swing.JLabel(); 
+        lbTitle2 = new javax.swing.JLabel(); 
+        lbTitle3 = new javax.swing.JLabel(); 
+        btnSerchName = new javax.swing.JButton(); 
+        txtName = new javax.swing.JTextField(); 
+        jComboBox1 = new javax.swing.JComboBox<>(); 
+        btnSearchComb = new javax.swing.JButton(); 
+        jMenuBar = new javax.swing.JMenuBar(); 
+        jMenu = new javax.swing.JMenu(); 
+        open = new javax.swing.JMenuItem(); 
+        save = new javax.swing.JMenuItem(); 
+        jScrollPane = new javax.swing.JScrollPane(); 
+        lbLegend = new javax.swing.JLabel(); 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE); // ti permette di fermare il programma quando chiudi la finestra
 
@@ -95,10 +166,10 @@ public class Secondary extends javax.swing.JFrame {
         lbTitle3.setForeground(new Color(255, 255, 255));
         
         // listener on the button to search by writing the name
-        btnSerch.setText("Search");
-        btnSerch.addActionListener(new java.awt.event.ActionListener() {
+        btnSerchName.setText("Search");
+        btnSerchName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSerchActionPerformed(evt);
+                btnSerchNameActionPerformed(evt);
             }
         });
         
@@ -122,10 +193,10 @@ public class Secondary extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Augusto (Giulio Claudii,  27 a.C.-14 d.C.)", "Vespasiano (Flavii, 68-79)", "Adriano (Antonini, 117-138)", "Settimio_Severo (Severi, 193-211)", "Valeriano (Valeriani, 253-260)", "Costantino (Costantiniani, 306-337)" }));
 
         // listener on the button to search by drop-down menu
-        btnSearch2.setText("Search");
-        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchComb.setText("Search");
+        btnSearchComb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch2ActionPerformed(evt);
+                btnSearchCombActionPerformed(evt);
             }
         });
         
@@ -174,9 +245,9 @@ public class Secondary extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
                 .addGap(129, 129, 129)
-                .addComponent(btnSearch2)
+                .addComponent(btnSearchComb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSerch)
+                .addComponent(btnSerchName)
                 .addGap(170, 170, 170))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,30 +282,38 @@ public class Secondary extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSearch2))
+                        .addComponent(btnSearchComb))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lbTitle3)
                         .addGap(18, 18, 18)
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSerch)))
+                        .addComponent(btnSerchName)))
                 .addGap(29, 29, 29))
         );
         // end various settings
 
         pack();
-    }// </editor-fold>                        
+    }                      
 
+    /**
+     * When the user clicks on the text area of the search by name, 
+     * the gray "Write a name..." is removed and the color is set to black.
+     * 
+     * @param evt   listener of the mouse click
+     */
     private void txtNameMouseClicked(java.awt.event.MouseEvent evt) {                                     
-        
         txtName.setText("");
         txtName.setForeground(new Color(0,0,0));
-        /* When the user clicks on the text area,
-        the writing is removed and the color is set to black
-        */
     }                                    
     
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {     //  is called when you try to close the frame                              
+    /**
+     * It is called when you try to close the frame. 
+     * In fact, when you click on the "x" a confirmation message is generated.
+     * 
+     * @param evt  listener of window click
+     */
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                  
 
         int Answer = JOptionPane.showConfirmDialog(null, "Are you sure want to exit?", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (Answer == JOptionPane.NO_OPTION) {
@@ -243,12 +322,16 @@ public class Secondary extends javax.swing.JFrame {
             if (Answer == JOptionPane.YES_OPTION) {
                 System.exit(0); // if the user clicks on "Yes" the system is shut down
             }
-        /*
-            When you click on the "x" it generates a confirmation message
-            */
     }
 
-    private void btnSerchActionPerformed(java.awt.event.ActionEvent evt) {     // it is called up when you press the search by name button                                    
+    /**
+     * In this method, search by name. If the input is correct, the new image 
+     * created is displayed on the screen. The images that are created from time 
+     * to time are kept in the history of the history and are numbered according to the counter.
+     * 
+     * @param evt   listener of the button click
+     */
+    private void btnSerchNameActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
         String input = txtName.getText();  // takes what is written in txtName
         
@@ -316,7 +399,15 @@ public class Secondary extends javax.swing.JFrame {
         }
     }       
     
-    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {    // it is called up when you press the search by dinasty button                                       
+    /**
+     * In this method, you search by dynasty from the drop-down menu. 
+     * The newly created image is displayed on the screen. The images that are 
+     * created from time to time are kept in the history of the history and are 
+     * numbered according to the counter.
+     * 
+     * @param evt   listener of the button click
+     */
+    private void btnSearchCombActionPerformed(java.awt.event.ActionEvent evt) {                                          
         
     	String input = (String) jComboBox1.getSelectedItem(); // takes what is selected on the drop-down menu
     	input = input.substring(0, input.indexOf(' ')); // processes the obtained string
@@ -379,7 +470,12 @@ public class Secondary extends javax.swing.JFrame {
         }
     }     
     
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {    // it is called when you click on the "save" menu item                                 
+    /**
+     * Selects the location of a folder where the current image will then be saved.
+     * 
+     * @param evt   listener of the button click
+     */
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {                                     
         
     	jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);  // the fileChooser selects only folders and not files
        	int response = jFileChooser.showOpenDialog(null);  // to read the path
@@ -397,7 +493,12 @@ public class Secondary extends javax.swing.JFrame {
     	
     }
     
-    private void openActionPerformed(java.awt.event.ActionEvent evt) {   // it is called when you click on the "open" menu item                            
+    /**
+     * Open the history folder to view the entire history from the start of the program.
+     * 
+     * @param evt   listener of the button click
+     */
+    private void openActionPerformed(java.awt.event.ActionEvent evt) {                               
         
     	try {
     		Desktop.getDesktop().open(new File("history"));  // shows the history folder on the screen
@@ -406,15 +507,8 @@ public class Secondary extends javax.swing.JFrame {
         }
     } 
 
-    /**
-     * @param args the command line arguments
-     */
+    // to start on the screen 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -431,32 +525,12 @@ public class Secondary extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Secondary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
+        // Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Secondary().setVisible(true);
             }
         });
-    }
-    
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton btnSearch2;
-    private javax.swing.JButton btnSerch;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFileChooser jFileChooser;
-    private javax.swing.JMenu jMenu;
-    private javax.swing.JMenuBar jMenuBar;
-    private javax.swing.JLabel lbImage;
-    private javax.swing.JLabel lbTitle1;
-    private javax.swing.JLabel lbTitle2;
-    private javax.swing.JLabel lbTitle3;
-    private javax.swing.JMenuItem open;
-    private javax.swing.JMenuItem save;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JLabel lbLegend;
-    // End of variables declaration                   
+    }                
 }
