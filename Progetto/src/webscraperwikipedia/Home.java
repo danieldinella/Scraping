@@ -216,7 +216,7 @@ public class Home extends javax.swing.JFrame {
 
         String s = txtName.getText(); // takes what is written in txtName
         
-        if (s.equals("Write a name...")){  // if you search without writing anything it launches an error panel
+        if (s.equals("Write a name...") || s.equals("")){  // if you search without writing anything it launches an error panel
         	JOptionPane.showMessageDialog(this, "Error! Enter valid input...", "Error", 0);
         }
         else {

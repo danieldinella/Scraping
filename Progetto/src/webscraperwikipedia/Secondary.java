@@ -252,7 +252,7 @@ public class Secondary extends javax.swing.JFrame {
 
         String input = txtName.getText();  // takes what is written in txtName
         
-        if (input.equals("Write a name...")){ // if you search without writing anything it launches an error panel
+        if (input.equals("Write a name...") || input.equals("")){ // if you search without writing anything it launches an error panel
         	JOptionPane.showMessageDialog(this, "Error! Enter valid input...", "Error", 0);
         }
         else {
