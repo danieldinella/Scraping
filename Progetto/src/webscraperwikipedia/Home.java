@@ -99,7 +99,7 @@ public class Home extends javax.swing.JFrame {
         
         // settings for the title writing
         lbTitle.setFont(new java.awt.Font("Castellar", 3, 14)); 
-        lbTitle.setText("Hi, this is a web scraper, start looking!");
+        lbTitle.setText("Hi, this is a web scraper, start searching!");
         lbTitle.setForeground(new Color(255, 255, 255));
         
         // settings for the first panel
@@ -254,8 +254,8 @@ public class Home extends javax.swing.JFrame {
      * @param evt  listener of the mouse click
      */
     private void voice1MouseClicked(java.awt.event.MouseEvent evt) {                                    
-        JOptionPane.showMessageDialog(this, "Here you can search for the family \n"
-                    + "tree of any Roman emperor. \n This is a web scaper!", "Info", 1); //1 as a parameter because it is a message panel.
+        JOptionPane.showMessageDialog(this, "Here you can search for Roman \n"
+                    + "emperors' family trees. \nThis is a web scaper!", "Info", 1); //1 as a parameter because it is a message panel.
         
     }                                   
 

@@ -484,7 +484,7 @@ public class Secondary extends javax.swing.JFrame {
             File curr = new File(currentPath); // image file you want to download
             try {
             	Files.copy(curr, f);    // make the copy
-            	JOptionPane.showMessageDialog(this, "Rescue successful!", "Success", 1);  // success message
+            	JOptionPane.showMessageDialog(this, "Image saved successfully!", "Success", 1);  // success message
             }
             catch (Exception e){
             	JOptionPane.showMessageDialog(this, "Attention! File not exist ...", "Attention", 2); // operation failed message
@@ -503,7 +503,7 @@ public class Secondary extends javax.swing.JFrame {
     	try {
     		Desktop.getDesktop().open(new File("history"));  // shows the history folder on the screen
         } catch (IOException ex) {
-        	JOptionPane.showMessageDialog(this, "Attention! Directory not exist ...", "Attention", 2);  // error message
+        	JOptionPane.showMessageDialog(this, "Attention! Directory doesn't exist ...", "Attention", 2);  // error message
         }
     } 
 
