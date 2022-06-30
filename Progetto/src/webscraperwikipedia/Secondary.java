@@ -1,18 +1,14 @@
 package webscraperwikipedia;
-import java.awt.BorderLayout; 
+import java.awt.BorderLayout;  
 import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import com.google.common.io.Files;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
+
 
 import java.awt.image.BufferedImage;
 
@@ -26,69 +22,69 @@ import java.awt.image.BufferedImage;
  * @author Enrico Chiarello
  * @version 1.6.6
  */
-public class Secondary extends javax.swing.JFrame {
+public class Secondary extends JFrame {
 	
 	// Variables declaration - do not modify 
 	/**
 	 * dynasties menu 
 	 */
-	private javax.swing.JComboBox<String> jComboBox1;
+	private JComboBox<String> jComboBox1;
 	/**
 	 * key to search by menu
 	 */
-    private javax.swing.JButton btnSearchComb;
+    private JButton btnSearchComb;
     /**
      *  the text area that acquires the name of the emperor
      */
-    private javax.swing.JTextField txtName;
+    private JTextField txtName;
     /**
      * key to search by writing the name
      */
-    private javax.swing.JButton btnSerchName;
+    private JButton btnSerchName;
     /**
      * the central writing
      */
-    private javax.swing.JLabel lbTitle1; 
+    private JLabel lbTitle1; 
     /**
      * written at the bottom right
      */
-    private javax.swing.JLabel lbTitle2;
+    private JLabel lbTitle2;
     /**
      * written at the bottom left
      */
-    private javax.swing.JLabel lbTitle3;
+    private JLabel lbTitle3;
     /**
      * the menu bar at the top of the window
      */
-    private javax.swing.JMenuBar jMenuBar;
+    private JMenuBar jMenuBar;
     /**
      * menu containing two items
      */
-    private javax.swing.JMenu jMenu;
+    private JMenu jMenu;
     /**
      * "open" item of menu
      */
-    private javax.swing.JMenuItem open;
+    private JMenuItem open;
     /**
      * "save" item of menu
      */
-    private javax.swing.JMenuItem save;
+    private JMenuItem save;
     /**
      * processed image shown on screen
      */
-    private javax.swing.JLabel lbImage;
+    private JLabel lbImage;
     /**
      * chooses the path for saving
      */
-    private javax.swing.JFileChooser jFileChooser;
+    private JFileChooser jFileChooser;
     /**
      * scroll panel that contains the image
      */
-    private javax.swing.JScrollPane jScrollPane;
+    private JScrollPane jScrollPane;
     /**
      * legend image
      */
-    private javax.swing.JLabel lbLegend;
+    private JLabel lbLegend;
     /**
      * counter for history and downloads
      */
@@ -122,21 +118,21 @@ public class Secondary extends javax.swing.JFrame {
      */                        
     private void initComponents() {
 
-    	jFileChooser = new javax.swing.JFileChooser(); 
-        lbImage = new javax.swing.JLabel(); 
-        lbTitle1 = new javax.swing.JLabel(); 
-        lbTitle2 = new javax.swing.JLabel(); 
-        lbTitle3 = new javax.swing.JLabel(); 
-        btnSerchName = new javax.swing.JButton(); 
-        txtName = new javax.swing.JTextField(); 
-        jComboBox1 = new javax.swing.JComboBox<>(); 
-        btnSearchComb = new javax.swing.JButton(); 
-        jMenuBar = new javax.swing.JMenuBar(); 
-        jMenu = new javax.swing.JMenu(); 
-        open = new javax.swing.JMenuItem(); 
-        save = new javax.swing.JMenuItem(); 
-        jScrollPane = new javax.swing.JScrollPane(); 
-        lbLegend = new javax.swing.JLabel(); 
+    	jFileChooser = new JFileChooser(); 
+        lbImage = new JLabel(); 
+        lbTitle1 = new JLabel(); 
+        lbTitle2 = new JLabel(); 
+        lbTitle3 = new JLabel(); 
+        btnSerchName = new JButton(); 
+        txtName = new JTextField(); 
+        jComboBox1 = new JComboBox<>(); 
+        btnSearchComb = new JButton(); 
+        jMenuBar = new JMenuBar(); 
+        jMenu = new JMenu(); 
+        open = new JMenuItem(); 
+        save = new JMenuItem(); 
+        jScrollPane = new JScrollPane(); 
+        lbLegend = new JLabel(); 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE); // ti permette di fermare il programma quando chiudi la finestra
 

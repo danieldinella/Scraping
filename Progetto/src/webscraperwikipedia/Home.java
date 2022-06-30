@@ -1,11 +1,8 @@
 package webscraperwikipedia;
-import java.awt.Color;
+import java.awt.Color; 
 import java.io.File;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
 *
@@ -18,45 +15,45 @@ import javax.swing.JTextField;
 * @author Enrico Chiarello
 * @version 1.6.6
 */
-public class Home extends javax.swing.JFrame {
+public class Home extends JFrame {
 	
 	// Variables declaration - do not modify    
 	/**
      * the central writing
      */
-    private javax.swing.JLabel lbTitle;
+    private JLabel lbTitle;
     /**
      * key to search by writing the name
      */
-    private javax.swing.JButton btnSearchName;
+    private JButton btnSearchName;
     /**
      * key to search by menu
      */
-    private javax.swing.JButton btnSearchComb;
+    private JButton btnSearchComb;
     /**
      * dynasties menu
      */
-    private javax.swing.JComboBox<String> jCombBox;
+    private JComboBox<String> jCombBox;
     /**
      * the menu at the top of the window
      */
-    private javax.swing.JMenuBar menu;
+    private JMenuBar menu;
     /**
      * the text area that acquires the name of the emperor
      */
-    private javax.swing.JTextField txtName;
+    private JTextField txtName;
     /**
      * "info" menu item
      */
-    private javax.swing.JMenu voice1;
+    private JMenu voice1;
     /**
      * first panel for graphics
      */
-    private javax.swing.JPanel jPanel1;
+    private JPanel jPanel1;
     /**
      * second panel for graphics
      */
-    private javax.swing.JPanel jPanel2;
+    private JPanel jPanel2;
     // End of variables declaration   
 	
 	/**
@@ -79,15 +76,15 @@ public class Home extends javax.swing.JFrame {
      */                       
     private void initComponents() {
 
-    	lbTitle = new javax.swing.JLabel(); 
-        txtName = new javax.swing.JTextField(); 
-        btnSearchName = new javax.swing.JButton(); 
-        jCombBox = new javax.swing.JComboBox<>(); 
-        btnSearchComb = new javax.swing.JButton(); 
-        menu = new javax.swing.JMenuBar(); 
-        voice1 = new javax.swing.JMenu(); 
-        jPanel1 = new javax.swing.JPanel(); 
-        jPanel2 = new javax.swing.JPanel(); 
+    	lbTitle = new JLabel(); 
+        txtName = new JTextField(); 
+        btnSearchName = new JButton(); 
+        jCombBox = new JComboBox<>(); 
+        btnSearchComb = new JButton(); 
+        menu = new JMenuBar(); 
+        voice1 = new JMenu(); 
+        jPanel1 = new JPanel(); 
+        jPanel2 = new JPanel(); 
 
         // adds a listener to the window that allows you to stop the program when you close the window
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
